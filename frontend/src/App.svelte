@@ -5,18 +5,57 @@
   import Counter from './lib/Counter.svelte';
 
   let apiKey: string = '';
+  let url: string = '';
 
   onMount(async () => {
     try {
       
       const res = await fetch('/api/key');
-      const data = await res.json();
-      //console.log(data);
-      apiKey = data.apiKey;
+      const dataApi = await res.json();
+      apiKey = dataApi.apiKey;
+      url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento&api-key=" + apiKey; // added the apiKey that you recieve from the env + backend here 
+      console.log(url); // double checking that this is correct 
+      
+      try{
+
+        /*
+         * Game Plan:
+         * making an array with all the id names and everything for each article 
+         * then looping throught them and adding the api info 
+         * that's it 
+         * will need to understand the images cause idk man 
+         */
+        const res2 = await fetch(url);
+        const data = await res2.json();
+
+        // all the current code here is just testing first article will need to change stuff to make it work for the whole thing follow the game plan 
+        const first = data.response.docs[4].headline.main;  // how to access the main title h3 here :D
+        // console.log(first);
+
+        console.log(data); // testing here 
+        let firstArticle = document.getElementById('firstColumn'); // gets the div that contains the first article information 
+        console.log(firstArticle); // checking 
+        const firstTitle = document.getElementById('title1'); // this is where the header is 
+
+        if (firstTitle) { // ts is being a mean so i needed to check that it wasn't null 
+          firstTitle.innerText = first; // inserting the api json title here 
+        } 
+        // needed help understanding now to make the whole div clickable here 
+        firstArticle?.addEventListener('click', () => {
+          window.location.href = data.response.docs[4].web_url;
+        });
+        
+      } catch(error){
+        console.error('Failed to fetch article info', error); // error message if something wrong happens with fetching the article 
+      }
+
     } catch (error) {
       console.error('Failed to fetch API key:', error);
     }
   });
+
+
+ 
 </script>
 
 
@@ -70,10 +109,11 @@
     <!-- Here is where the main body takes place -->
    <div class="body">
     <!-- Split into 3 different columns, the first and second is for the ipad view -->
-        <div class="firstColumn">
+        <div class="firstColumn" id="firstColumn">
             <div class="second">
                 <hr class="special1">
-                <h3 class="title1">Sesame Yuzu Ice Cream Made Everyone Additicted</h3>
+                <h3 class="title1" id="title1">Sesame Yuzu Ice Cream Made Everyone Additicted</h3>
+                <a id="link1"></a>
                 <div class="icecream">
                     <img src="icecream.png" alt="mala">
                 </div>

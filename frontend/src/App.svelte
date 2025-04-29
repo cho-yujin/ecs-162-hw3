@@ -6,6 +6,7 @@
 
   let apiKey: string = '';
   let url: string = '';
+  let boxIds : string[] = ["box1", "box2", "box3", "box4", "box5", "box6"];
 
   onMount(async () => {
     try {
@@ -29,21 +30,27 @@
         const data = await res2.json();
 
         // all the current code here is just testing first article will need to change stuff to make it work for the whole thing follow the game plan 
-        const first = data.response.docs[4].headline.main;  // how to access the main title h3 here :D
+        let first = data.response.docs[4].headline.main;  // how to access the main title h3 here :D
+        let firstArticle = document.getElementById(boxIds[1]);
+        for (let i = 0; i < 6; i++) {
+            first = data.response.docs[i].headline.main;
+            firstArticle = document.getElementById(boxIds[i]); // gets the div that contains the first article information 
+            console.log(firstArticle); 
+            firstArticle?.addEventListener('click', () => {
+                window.location.href = data.response.docs[i].web_url;
+            });
+        }
         // console.log(first);
 
         console.log(data); // testing here 
-        let firstArticle = document.getElementById('firstColumn'); // gets the div that contains the first article information 
-        console.log(firstArticle); // checking 
+       // checking 
         const firstTitle = document.getElementById('title1'); // this is where the header is 
 
         if (firstTitle) { // ts is being a mean so i needed to check that it wasn't null 
           firstTitle.innerText = first; // inserting the api json title here 
         } 
         // needed help understanding now to make the whole div clickable here 
-        firstArticle?.addEventListener('click', () => {
-          window.location.href = data.response.docs[4].web_url;
-        });
+      
         
       } catch(error){
         console.error('Failed to fetch article info', error); // error message if something wrong happens with fetching the article 
@@ -57,8 +64,6 @@
 
  
 </script>
-
-
 
   <section class="main">
     <header> 
@@ -109,10 +114,10 @@
     <!-- Here is where the main body takes place -->
    <div class="body">
     <!-- Split into 3 different columns, the first and second is for the ipad view -->
-        <div class="firstColumn" id="firstColumn">
+        <div class="firstColumn" id="box1">
             <div class="second">
                 <hr class="special1">
-                <h3 class="title1" id="title1">Sesame Yuzu Ice Cream Made Everyone Additicted</h3>
+                <h3 class="title1" id="title1"></h3>
                 <a id="link1"></a>
                 <div class="icecream">
                     <img src="icecream.png" alt="mala">
@@ -122,7 +127,7 @@
             </div>
         </div>
 
-        <div  class="secondColumn">
+        <div  class="secondColumn" id="box2">
             <div class="first">
                 <img src="littleHuman.png" alt="offBeat">
                 <h3 class="title1">Did the Little Human Conqure or Befriend the Giant Troll?</h3>
@@ -132,7 +137,7 @@
             </div>    
         </div>
 
-        <div  class="thirdColumn">
+        <div  class="thirdColumn" id="box3">
             <div class="first">
                 <hr class="special">
                 <h3 class="title1">The Hottest Banana Pudding Matcha @ OffBeat Coffee</h3>
@@ -142,24 +147,17 @@
             </div>
         </div>
 
-        <div class="firstColumn">
+        <div class="firstColumn" id="box4">
             <div class="second">
                 <hr>
-                <h3 class="title2">A Young Adult's Sleep: A Rant</h3>
+                <h3 class="title1">A Young Adult's Sleep: A Rant</h3>
                 <p>I know I should be sleeping earlier so I don't miss my 162 class but sometimes I do work all day and suddenly it's 3am and I am playing Stardue Valley :D</p>
                 <p class="time">96 MIN READ</p>
-                <hr>
-                <h3 class="title2">Home Oh Sweet Home</h3>
-                <p>I have been on campus for way too long and now I really want to be at home, but I still have classes and a club meeting. I need to finish all my hw due, but this is so annoying just want to be in bed.</p>
-                <p class="time">800009 MIN READ</p>
-                <hr>
-                <h3 class="title2">YFG Malatang</h3>
-                <p>When I went to go finish my friends in Seattle I got to try YFG Malatang and now I am really craving it but the closest location is in Dublin which is so sad. Wish we had one in Davis too. </p>
-                <p class="time">69 MIN READ</p>
+               
             </div>
           
         </div>
-        <div  class="firstColumn">
+        <div  class="firstColumn" id="box5">
             <div class="first">
                 <hr>
                 <h3 class="title1">Little Kitty Wants My Soup</h3>
@@ -170,7 +168,7 @@
                 <p class="time">6 MIN READ</p>
             </div>   
         </div>
-        <div  class="thirdColumn">
+        <div  class="thirdColumn" id="box6">
             <div class="second">
                 <hr>
                 <h3 class="title1">New Matcha Pop-Up at Davis</h3>

@@ -147,16 +147,6 @@ hr.special1{
       margin: 4% 0 4% 0;
       font-size: 27px;
   }
-  .title1:hover{
-    color: rgb(109, 108, 108);
-    cursor: pointer;
-  }
-  .title2{
-      font-family: Tinos;
-      font-weight: 500;
-      margin: 4% 0 4% 0;
-      font-size: 26px;
-  }
   p{
       font-size: 17px;
       margin: 4% 0 2% 0%;
@@ -185,6 +175,10 @@ hr.special1{
   }
   .firstColumn:hover{
     cursor: pointer;
+    .title1{
+        color: rgb(109, 108, 108);
+      }
+
   }
   .secondColumn{
       /* background-color: blueviolet; */
@@ -195,6 +189,12 @@ hr.special1{
           max-height: 100%; 
       }
   }
+  .secondColumn:hover{
+    cursor: pointer;
+    .title1{
+        color: rgb(109, 108, 108);
+      }
+  }
   .thirdColumn{
       margin-left: 10%;
       /* margin-right: 10%; */ 
@@ -203,6 +203,12 @@ hr.special1{
           max-width:  100%;
           max-height: 100%;
           padding-top: 3px;        
+      }
+  }
+  .thirdColumn:hover{
+    cursor: pointer;
+    .title1{
+        color: rgb(109, 108, 108);
       }
   }
 }
@@ -267,12 +273,6 @@ had to change from 3 to 2 columns, this complicated the vertical lines so I rear
               border-left: 0px;
           border-right: 0px;
           }
-
-          
-          /* order: 1; */
-          /* border-left: 0px;
-          border-right: 0px; */
-          
       }
       .thirdColumn{
           padding: 0;

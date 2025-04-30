@@ -10,7 +10,7 @@
   let titleIds : string[] = ["title1", "title2", "title3", "title4", "title5", "title6"];
   let descIds : string[] = ["desc1", "desc2", "desc3", "desc4", "desc5", "desc6"];
   let imgIds: string[] = ["img1", "img2", "img3", "img4", "img5", "img6"];
-  let choosenArticles : number[] = [0, 1, 2, 3, 4, 5, 7]; 
+  let choosenArticles : number[] = [0, 2, 3, 8, 6, 7]; 
 
 
 
@@ -47,13 +47,13 @@
      
 
         console.log(images.url);
-        for (const i of choosenArticles) {
-            first = data.response.docs[i].headline.main;
-            desc = data.response.docs[i].abstract;
+        for (let i = 0; i<6; i++) { // come here 
+            first = data.response.docs[choosenArticles[i]].headline.main;
+            desc = data.response.docs[choosenArticles[i]].abstract;
             firstArticle = document.getElementById(boxIds[i]); // gets the div that contains the first article information 
             // console.log(firstArticle); 
             firstArticle?.addEventListener('click', () => {
-                window.location.href = data.response.docs[i].web_url;
+                window.location.href = data.response.docs[choosenArticles[i]].web_url;
             });
 
             firstTitle = document.getElementById(titleIds[i]); // this is where the header is 
@@ -64,7 +64,7 @@
             if(descToPrint){
                 descToPrint.innerText = desc; 
             }
-            images = data.response.docs[i].multimedia.default;
+            images = data.response.docs[choosenArticles[i]].multimedia.default;
             let img = document.getElementById(imgIds[i]) as HTMLImageElement; // used helped from stackoverflow here 
             if(img){
             img.src = images.url; 

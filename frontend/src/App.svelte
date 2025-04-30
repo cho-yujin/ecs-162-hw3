@@ -1,8 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import svelteLogo from './assets/svelte.svg';
-  import viteLogo from '/vite.svg';
-  import Counter from './lib/Counter.svelte';
 
   let apiKey: string = '';
   let url: string = '';

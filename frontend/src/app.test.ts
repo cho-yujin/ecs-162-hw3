@@ -6,16 +6,12 @@ import Navbar from "./components/Navbar.svelte";
 import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
 let data: any = null;
-let date: any = null;
 beforeAll(async () => {
   const apiKey = await getApiKey();
   const url =
-    'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=davis&api-key=' +
+    'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
     apiKey;
   data = await fetchArticles(url);
-
-  const rawDate = new Date().toString();
-  date = rawDate.slice(0, 16);
 });
 
 // Checks that API key is a non-empty string.
@@ -70,19 +66,18 @@ test("Article content is properly displayed", () => {
   screen.getByTestId('time');
 });
 
-// Checks that the number of grid columns displayed per breakpoint is correct.
+// // Checks that the number of grid columns displayed per breakpoint is correct.
 // test("UI is responsive", async () => {
 //   render(App);
 // });
 
 // Gets current date and compares it with date displayed on page.
-// test("Date at top of the page is correct", async () => {
-//   render(Navbar);
-//   let navbarDate = null;
-//   try {
-//     navbarDate = screen.getByDisplayValue(slicedDate)
-//   } catch (e) { }
-
-//   assert(navbarDate !== null);
-//   // this doesn't work
-// });
+test("Date at top of the page is correct", () => {
+  render(Navbar);
+  // gets today's date
+  const todaysdate = new Date().toString().slice(0, 16);
+ // checks that the date on the document is equivalent to today's date 
+  let correctDate = screen.getByTestId('dateInfo').textContent!.includes(todaysdate); 
+  // screen.debug(screen.getByTestId('dateInfo')); 
+  assert(correctDate); 
+});

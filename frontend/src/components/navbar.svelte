@@ -7,7 +7,7 @@
 <header> 
     <!-- This is where all the header stuff is like title and date  -->
     <div class="date">
-        <p><strong>{currentDate}</strong></p>
+        <p data-testid="dateInfo">{currentDate}</p>
         <p>Today's Paper</p>
     </div>
     <h1>The New York Times</h1>

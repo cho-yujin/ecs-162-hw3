@@ -58,18 +58,18 @@ test("Articles fetched are related to Sacramento or Davis", async () => {
 });
 
 // Creates a test article. Checks that all parts of the article are displayed properly.
-// test("Article content is properly displayed", () => {
-//   const articleData = {
-//     title: "Test Article",
-//     abstract: "This is a test article test test test test",
-//     thumbnail: "./assets/important-image.jpg",
-//     caption: "Orange cat",
-//     url: "www.google.com",
-//   }
+test("Article content is properly displayed", () => {
+  const articleData = {
+    title: "Test Article",
+    abstract: "This is a test article test test test test",
+    thumbnail: "./assets/important-image.jpg",
+    caption: "Orange cat",
+    url: "www.google.com",
+  }
   
-//   render(Article);
-  
-// });
+  render(Article, articleData);
+  // TODO: Check if each element exists? lol
+});
 
 // Checks that the number of grid columns displayed per breakpoint is correct.
 // test("UI is responsive", async () => {
@@ -88,4 +88,5 @@ test("Articles fetched are related to Sacramento or Davis", async () => {
 //   } catch (e) { }
 
 //   assert(navbarDate !== null);
+//   // this doesn't work
 // });

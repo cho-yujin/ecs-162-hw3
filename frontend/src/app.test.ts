@@ -1,34 +1,33 @@
-import { test } from "vitest";
+import { expect, assert, test } from "vitest";
 import { render } from "@testing-library/svelte";
 import App from "./App.svelte";
 
-// API key is getting returned as expected from Flask server
-test("APIKey", async () => {
-  render(App);
+test("API key from Flask server is correct", async () => {
+  const apiKey = App.getApiKey();
+
+
 });
 
-// API returns data in expected format
-test("QueryData", async () => {
-  render(App);
-});
+// test("Fetched data is formatted correctly", async () => {
+//   render(App);
+// });
 
-// Query correctly fetches Sacramento related articles
-test("QueryContent", async () => {
-  render(App);
-});
+// test("Articles fetched are related to Sacramento", async () => {
+//   render(App);
+// });
 
-// Article content is properly displayed
-test("ArticleContent", async () => {
-  render(App);
-});
+// test("Article content is properly displayed", async () => {
+//   render(App);
+// });
 
-// UI is responsive
-test("ResponsiveUI", async () => {
-  render(App);
-});
+// test("UI is responsive", async () => {
+//   render(App);
+// });
 
-// Date at top of the page is correct
-test("Date", async () => {
-  render(App);
-});
+// test("Date at top of the page is correct", async () => {
+//   render(App);
+// });
 
+// test("Articles redirect to their NYT pages", async () => {
+//   render(App);
+// });

@@ -1,18 +1,25 @@
-import { expect, assert, test } from "vitest";
+import { assert, test } from "vitest";
 import { render } from "@testing-library/svelte";
 import App from "./App.svelte";
 import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
-// Tests getApiKey
+// Checks that API key is a non-empty string.
+// Checks that API key can be successfully used to pull data (non-null object) from the API.
 test("API key from Flask server is correct", async () => {
   const apiKey = await getApiKey();
-
-  assert(apiKey != "");
+  assert(apiKey != null);
   assert(typeof apiKey === "string");
   assert(apiKey.length != 0);
+
+  const url =
+  'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
+  apiKey;
+  const data = await fetchArticles(url);
+  assert(data != null);
+  assert(typeof data === "object");
 });
 
-// Tests fetchArticles
+// Checks that all fetched data contains the necessary article elements.
 test("Fetched data is formatted correctly", async () => {
   const apiKey = await getApiKey();
   const url =
@@ -29,18 +36,39 @@ test("Fetched data is formatted correctly", async () => {
   }
 });
 
-// test("Articles fetched are related to Sacramento", async () => {
-//   render(App);
-// });
+// Checks that articles fetched contain the words "sacramento" or "davis" in their "Location" value.
+test("Articles fetched are related to Sacramento or Davis", async () => {
+  const apiKey = await getApiKey();
+  const url =
+    'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
+    apiKey;
+  const data = await fetchArticles(url);
 
+  for (const dataObject of data.response.docs) {
+    let keywords = dataObject.keywords
+
+    keywords
+      .filter((keyword: any) => keyword.name === "Location")
+      .filter((keyword: any) => keyword.value.includes("sacramento") || keyword.value.includes("davis"));
+      
+    assert(keywords.length != 0);
+  }
+});
+
+// Creates a test article. Checks that all parts of the article are displayed properly.
 // test("Article content is properly displayed", async () => {
 //   render(App);
 // });
 
+// Checks that the number of grid columns displayed per breakpoint is correct.
 // test("UI is responsive", async () => {
 //   render(App);
 // });
 
+// // Gets current date and compares it with date displayed on page.
 // test("Date at top of the page is correct", async () => {
-//   render(App);
+//   const date = new Date().toString();
+//   const slicedDate = date.slice(0, 16);
+
+//   // TODO: get date n check :P
 // });

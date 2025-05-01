@@ -1,13 +1,13 @@
+<script>
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+    const date = new Date().toString();
+    const currentDate = date.slice(0, 16);
+</script>
+
 <header> 
     <!-- This is where all the header stuff is like title and date  -->
     <div class="date">
-        <p id="currentDate"></p>
-        <script>
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
-            const date = new Date().toString();
-            const extracted = date.slice(0, 16);
-            document.getElementById("currentDate").innerHTML = extracted;
-        </script>
+        <p><strong>{currentDate}</strong></p>
         <p>Today's Paper</p>
     </div>
     <h1>The New York Times</h1>

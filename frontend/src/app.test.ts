@@ -1,6 +1,8 @@
 import { assert, test } from "vitest";
-import { render } from "@testing-library/svelte";
+import { render, screen } from "@testing-library/svelte";
 import App from "./App.svelte";
+import Article from "./components/Article.svelte";
+import Navbar from "./components/Navbar.svelte";
 import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
 // Checks that API key is a non-empty string.
@@ -56,8 +58,17 @@ test("Articles fetched are related to Sacramento or Davis", async () => {
 });
 
 // Creates a test article. Checks that all parts of the article are displayed properly.
-// test("Article content is properly displayed", async () => {
-//   render(App);
+// test("Article content is properly displayed", () => {
+//   const articleData = {
+//     title: "Test Article",
+//     abstract: "This is a test article test test test test",
+//     thumbnail: "./assets/important-image.jpg",
+//     caption: "Orange cat",
+//     url: "www.google.com",
+//   }
+  
+//   render(Article);
+  
 // });
 
 // Checks that the number of grid columns displayed per breakpoint is correct.
@@ -65,10 +76,16 @@ test("Articles fetched are related to Sacramento or Davis", async () => {
 //   render(App);
 // });
 
-// // Gets current date and compares it with date displayed on page.
+// Gets current date and compares it with date displayed on page.
 // test("Date at top of the page is correct", async () => {
 //   const date = new Date().toString();
 //   const slicedDate = date.slice(0, 16);
 
-//   // TODO: get date n check :P
+//   render(Navbar);
+//   let navbarDate = null;
+//   try {
+//     navbarDate = screen.getByDisplayValue(slicedDate)
+//   } catch (e) { }
+
+//   assert(navbarDate !== null);
 // });

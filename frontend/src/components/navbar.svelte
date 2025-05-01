@@ -22,7 +22,7 @@
         <a href="#arts">Arts </a>
         <a href="#lifestyle">Lifestyle </a>
         <a href="#opinion">Opinion </a>
-        <div class="vert"></div>
+        <!-- <div class="vert"></div> -->
         <a href="#audio">Audio </a>
         <a href="#games">Games </a>
         <a href="#cooking">Cooking </a>

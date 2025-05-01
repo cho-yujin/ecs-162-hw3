@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import Navbar from "./components/Navbar.svelte";
 
   let boxIds: string[] = ["box1", "box2", "box3", "box4", "box5", "box6"];
   let titleIds: string[] = [
@@ -23,7 +24,7 @@
 
   export async function getApiKey() {
     try {
-      const res = await fetch("/api/key");
+      const res = await fetch("http://localhost:8000/api/key");
       const dataApi = await res.json();
       return dataApi.apiKey;
     } catch (error) {
@@ -110,6 +111,8 @@
 </script>
 
 <section class="main">
+  <Navbar />
+
   <!-- Here is where the main body takes place -->
   <div class="body">
     <!-- Split into 3 different columns, the first and second is for the ipad view -->

@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <div  class="secondColumn" id="box2">
+        <div class="secondColumn" id="box2">
             <div class="first">
                 <img src="" alt="offBeat" id="img2">
                 <h3 class="title1" id="title2"></h3>

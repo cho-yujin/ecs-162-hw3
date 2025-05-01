@@ -5,6 +5,9 @@
   import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
   let allArticles: ArticleData[] = [];
+  let apiKey: string = "";
+  let url: string = "";
+  let pageNum = 0;
 
   function constructArticleObject(dataObject: any): ArticleData {
     return {
@@ -16,15 +19,14 @@
     };
   }
 
-  onMount(async () => {
-    // Get apiKey from Flask backend
-    const apiKey = await getApiKey();
+  async function getNewArticles(url: string, apiKey: string) {
+    let apiKeyParam = "&api-key=" + apiKey;
+    let pageNumParam = "&page=" + pageNum;
+    pageNum += 1;
 
-    // Construct url
-    const url =
-      'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
-      apiKey;
-    // TODO: When user scrolls to bottom of page, call 10 more articles + push into allArticles
+    url =
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22" +
+      apiKeyParam + pageNumParam;
 
     // Fetch articles
     const data = await fetchArticles(url);
@@ -35,6 +37,14 @@
     }
     // Triggers rerender
     allArticles = allArticles;
+  }
+
+  onMount(async () => {
+    // Get apiKey from Flask backend
+    apiKey = await getApiKey();
+
+    // Fetch articles and put into allArticles array
+    getNewArticles(url, apiKey);
   });
 </script>
 
@@ -44,5 +54,8 @@
     {#each allArticles as articleData}
       <Article {...articleData} />
     {/each}
+  </div>
+  <div class="center">
+    <button on:click={() => getNewArticles(url, apiKey)}>Load more articles</button>
   </div>
 </section>

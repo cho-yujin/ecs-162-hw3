@@ -42,7 +42,8 @@
 
     // Construct url
     const url =
-      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento&api-key=" + apiKey;
+      'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
+      apiKey;
     console.log("URL:", url);
 
     // Fetch articles
@@ -51,7 +52,7 @@
     // Put article objects into array
     for (const dataObject of data.response.docs) {
       allArticles.push(constructArticleObject(dataObject));
-    };
+    }
     // Triggers rerender
     allArticles = allArticles;
   });

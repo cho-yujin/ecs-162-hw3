@@ -25,7 +25,7 @@
     pageNum += 1;
 
     url =
-      "https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22" +
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=UC%20Davis" +
       apiKeyParam + pageNumParam;
 
     // Fetch articles
@@ -55,7 +55,7 @@
       <Article {...articleData} />
     {/each}
   </div>
-  <div class="center">
+  <div class="button-container">
     <button on:click={() => getNewArticles(url, apiKey)}>Load more articles</button>
   </div>
 </section>

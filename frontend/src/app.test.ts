@@ -41,11 +41,12 @@ test("Fetched data is formatted correctly", async () => {
 test("Articles fetched are related to Sacramento or Davis", async () => {
   for (const dataObject of data.response.docs) {
     let keywords = dataObject.keywords
-
     keywords
       .filter((keyword: any) => keyword.name === "Location")
       .filter((keyword: any) => keyword.value.includes("sacramento") || keyword.value.includes("davis"));
-      
+    
+    // If keywords does not have any objects in it,
+    // then no articles related to sac/davis were found and test fails.
     assert(keywords.length != 0);
   }
 });

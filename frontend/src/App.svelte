@@ -31,7 +31,7 @@
       id: dataObject._id,
       title: dataObject.headline.main,
       abstract: dataObject.abstract,
-      thumbnail: dataObject.multimedia.thumbnail.url,
+      thumbnail: dataObject.multimedia.default.url,
       caption: dataObject.multimedia.caption,
     };
   }

@@ -13,7 +13,7 @@
 <div class="firstColumn">
   <div class="second">
     <h3 class="title1">{props.title}</h3>
-    <img src={props.thumbnail} alt={props.caption} />
+    <img class="thumbnail" src={props.thumbnail} alt={props.caption} />
     <p>{props.abstract}</p>
     <p class="time">1000 MIN READ</p>
     <hr />

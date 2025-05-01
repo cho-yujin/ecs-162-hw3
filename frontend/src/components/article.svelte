@@ -12,12 +12,12 @@
 
 <div class="firstColumn">
   <div class="second">
-    <h3 class="title1">{props.title}</h3>
-    <a href={props.url}>
-      <img class="thumbnail" src={props.thumbnail} alt={props.caption} />
+    <h3 data-testid="articleHeader" class="title1">{props.title}</h3>
+    <a data-testid="url" href={props.url}>
+      <img data-testid="thumbnail" class="thumbnail" src={props.thumbnail} alt={props.caption} />
     </a>
-    <p>{props.abstract}</p>
-    <p class="time">1000 MIN READ</p>
+    <p data-testid="abstract">{props.abstract}</p>
+    <p data-testid="time" class="time">1000 MIN READ</p>
     <hr />
   </div>
 </div>

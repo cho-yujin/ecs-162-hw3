@@ -19,10 +19,16 @@
   onMount(async () => {
     // Get apiKey from Flask backend
     const apiKey = await getApiKey();
+    const queryParam = "%22UC%20Davis%22";
 
     // Construct url
+    // const url =
+    //   "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+    //   queryParam +
+    //   "&api-key=" +
+    //   apiKey;
     const url =
-      'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=timesTag.location.contains%3A%22Sacramento%22 OR timesTag.location.contains%3A%22Davis%22&api-key=' +
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=davis&api-key=" +
       apiKey;
     // TODO: When user scrolls to bottom of page, call 10 more articles + push into allArticles
 

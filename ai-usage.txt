@@ -1,0 +1,12 @@
+We did not use any AI assistance for the code for our project. 
+We did use online documentation for Typescript syntax and unit testing, as listed below.
+
+These were used to learn unit testing using Vitest, in addition to discussion slides:
+https://testing-library.com/docs/queries/about 
+https://svelte.dev/docs/svelte/testing 
+https://vitest.dev/api/assert.html 
+https://www.typescriptlang.org/docs/ 
+
+We did use ChatGPT assistance for issues we had in downloading packages, such as:
+Searching up random git commands that I forgot about.
+For debugging: when trying to download Vitest, my silicone Mac won’t download a module correctly so I had to show chatgpt the error message and it helped me undownload and then redownload vitest and everything work.

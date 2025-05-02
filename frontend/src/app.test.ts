@@ -66,11 +66,6 @@ test("Article content is properly displayed", () => {
   screen.getByTestId('time');
 });
 
-// // Checks that the number of grid columns displayed per breakpoint is correct.
-// test("UI is responsive", async () => {
-//   render(App);
-// });
-
 // Gets current date and compares it with date displayed on page.
 test("Date at top of the page is correct", () => {
   render(Navbar);

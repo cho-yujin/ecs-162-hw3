@@ -22,7 +22,7 @@
 .sidebar-header {
     top: 0;
     background-color: #ffffff;
-    padding: 8px 16px 0px 16px;
+    padding: 8px 20px 0px 20px;
 }
 
 .main {
@@ -32,6 +32,10 @@
 }
 footer {
   padding: 0 10% 0 10%;
+}
+
+.body-content {
+    padding: 32px 48px;
 }
 
 .small-gap {

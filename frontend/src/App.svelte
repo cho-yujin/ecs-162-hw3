@@ -71,21 +71,33 @@
   <Sidebar
     title={sidebarTitle}
     toggleSidebar={() => toggleSidebar(sidebarTitle)}
-    allComments={["comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment"]}
+    allComments={[
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+    ]}
     numComments={10}
   />
-
-  <Navbar />
-
-  <!-- Renders one element for each article in articleData -->
-  <div class="body">
-    {#each allArticles as articleData}
-      <Article {...articleData} />
-    {/each}
-  </div>
-  <div class="button-container">
-    <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}
-      >Load more articles</button
-    >
+  
+  <div class="body-content">
+    <Navbar />
+    <!-- Renders one element for each article in articleData -->
+    <div class="body">
+      {#each allArticles as articleData}
+        <Article {...articleData} />
+      {/each}
+    </div>
+    <div class="button-container">
+      <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}
+        >Load more articles</button
+      >
+    </div>
   </div>
 </section>

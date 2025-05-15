@@ -13,7 +13,7 @@
 
 <aside id="sidebar">
   <div class="sticky sidebar-header">
-    <div class="flex-row justify-between">
+    <div class="flex-row justify-between small-gap">
       <h1 class="sidebar-header-text">{props.title}</h1>
       <button class="x-button" onclick={() => props.toggleSidebar(props.title)}>X</button>
     </div>

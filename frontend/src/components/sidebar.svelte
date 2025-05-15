@@ -3,7 +3,6 @@
 
   export type SidebarProps = {
     title: string;
-    visible: boolean;
     toggleSidebar: () => void;
     allComments: any;
     numComments: Number;
@@ -12,38 +11,41 @@
   const props: SidebarProps = $props();
 </script>
 
-<aside class="sidebar">
-  <div class="flex-row justify-between">
-    <h1 class="sidebar-header">{props.title}</h1>
-    <button class="x-button" onclick={props.toggleSidebar}>X</button>
+<aside id="sidebar">
+  <div class="sticky sidebar-header">
+    <div class="flex-row justify-between">
+      <h1 class="sidebar-header">{props.title}</h1>
+      <button class="x-button" onclick={props.toggleSidebar}>X</button>
+    </div>
+    <hr />
+    <br />
   </div>
-  <hr />
-  <br />
-  <br />
+  <div class="sidebar-content">
+    <br />
+    <div class="w-full">
+      <div class="flex-row comments-header align-end">
+        <h1 class="comments-header">Comments</h1>
+        <p class="comments-number">{props.numComments}</p>
+      </div>
 
-  <div class="w-full">
-    <div class="flex-row comments-header align-end">
-      <h1 class="comments-header">Comments</h1>
-      <p class="comments-number">{props.numComments}</p>
-    </div>
+      <textarea
+        class="comment-input"
+        id="comment"
+        name="comment"
+        placeholder="Share your thoughts..."
+      ></textarea>
 
-    <textarea
-      class="comment-input"
-      id="comment"
-      name="comment"
-      placeholder="Share your thoughts..."
-    ></textarea>
+      <div class="flex-row justify-end small-gap">
+        <button class="cancel-button">CANCEL</button>
+        <button class="submit-button">SUBMIT</button>
+      </div>
 
-    <div class="flex-row justify-end small-gap">
-      <button class="cancel-button">CANCEL</button>
-      <button class="submit-button">SUBMIT</button>
-    </div>
-
-    <div class="flex-col comments-content">
-      {#each props.allComments as commentData}
-        <Comment {...commentData} />
-        <hr />
-      {/each}
+      <div class="flex-col comments-content">
+        {#each props.allComments as commentData}
+          <Comment {...commentData} />
+          <hr />
+        {/each}
+      </div>
     </div>
   </div>
 </aside>

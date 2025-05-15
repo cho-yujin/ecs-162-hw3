@@ -2,13 +2,15 @@
   import { onMount } from "svelte";
   import Navbar from "./components/navbar.svelte";
   import Article, { type ArticleData } from "./components/article.svelte";
-  import Sidebar from "./components/sidebar.svelte"
+  import Sidebar from "./components/sidebar.svelte";
   import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
-  let isSidebarVisible = $state(false);
-
   function toggleSidebar() {
-    isSidebarVisible = !isSidebarVisible;
+    let sidebar = document.getElementById("sidebar")!;
+    let overlay = document.getElementById("overlay")!;
+
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
   }
 
   let allArticles: ArticleData[] = $state([]);
@@ -35,7 +37,8 @@
 
     url =
       "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=UC%20Davis" +
-      apiKeyParam + pageNumParam;
+      apiKeyParam +
+      pageNumParam;
 
     // Fetch articles
     const data = await fetchArticles(url);
@@ -59,15 +62,13 @@
 
 <section class="main">
   <!-- Sidebar and overlay -->
-  <div class="overlay"></div>
-  <div class="flex-row justify-end">
-    <Sidebar 
-      title="Reallly really important news article!! Why is the title so long? Who knows" 
-      visible={isSidebarVisible}
-      toggleSidebar={toggleSidebar}
-      allComments={[1, 2, 3]}
-      numComments={10} />
-  </div>
+  <div id="overlay"></div>
+  <Sidebar
+    title="Reallly really important news article!! Why is the title so long? Who knows"
+    {toggleSidebar}
+    allComments={["comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment"]}
+    numComments={10}
+  />
 
   <Navbar />
 
@@ -78,6 +79,8 @@
     {/each}
   </div>
   <div class="button-container">
-    <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}>Load more articles</button>
+    <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}
+      >Load more articles</button
+    >
   </div>
 </section>

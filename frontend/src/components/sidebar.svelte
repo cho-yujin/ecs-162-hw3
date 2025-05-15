@@ -3,7 +3,7 @@
 
   export type SidebarProps = {
     title: string;
-    toggleSidebar: () => void;
+    toggleSidebar: (title: string) => void;
     allComments: any;
     numComments: Number;
   };
@@ -14,8 +14,8 @@
 <aside id="sidebar">
   <div class="sticky sidebar-header">
     <div class="flex-row justify-between">
-      <h1 class="sidebar-header">{props.title}</h1>
-      <button class="x-button" onclick={props.toggleSidebar}>X</button>
+      <h1 class="sidebar-header-text">{props.title}</h1>
+      <button class="x-button" onclick={() => props.toggleSidebar(props.title)}>X</button>
     </div>
     <hr />
     <br />

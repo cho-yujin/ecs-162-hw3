@@ -4,10 +4,15 @@
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
   import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
+  import { getByTitle } from "@testing-library/svelte";
 
-  function toggleSidebar() {
+  let sidebarTitle = $state("Default title");
+
+  function toggleSidebar(title: string) {
     let sidebar = document.getElementById("sidebar")!;
     let overlay = document.getElementById("overlay")!;
+
+    sidebarTitle = title;
 
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
@@ -64,8 +69,8 @@
   <!-- Sidebar and overlay -->
   <div id="overlay"></div>
   <Sidebar
-    title="Reallly really important news article!! Why is the title so long? Who knows"
-    {toggleSidebar}
+    title={sidebarTitle}
+    toggleSidebar={() => toggleSidebar(sidebarTitle)}
     allComments={["comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment", "comment"]}
     numComments={10}
   />

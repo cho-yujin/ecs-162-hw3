@@ -15,7 +15,7 @@
 <aside class="sidebar">
   <div class="flex-row justify-between">
     <h1 class="sidebar-header">{props.title}</h1>
-    <button class="cancel-button" onclick={props.toggleSidebar}>X</button>
+    <button class="x-button" onclick={props.toggleSidebar}>X</button>
   </div>
   <hr />
   <br />
@@ -33,9 +33,17 @@
       name="comment"
       placeholder="Share your thoughts..."
     ></textarea>
-    <button>Post comment</button>
-    {#each props.allComments as commentData}
-      <Comment {...commentData} />
-    {/each}
+
+    <div class="flex-row justify-end small-gap">
+      <button class="cancel-button">CANCEL</button>
+      <button class="submit-button">SUBMIT</button>
+    </div>
+
+    <div class="flex-col comments-content">
+      {#each props.allComments as commentData}
+        <Comment {...commentData} />
+        <hr />
+      {/each}
+    </div>
   </div>
 </aside>

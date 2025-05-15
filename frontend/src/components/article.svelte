@@ -23,7 +23,7 @@
     <p data-testid="abstract">{props.abstract}</p>
     <p data-testid="time" class="time">1000 MIN READ</p>
 
-    <div class="justify-end">
+    <div class="flex-row justify-end">
       <button class="comments-button" onclick={props.toggleSidebar}>
         <img src={commentsIcon} alt={props.caption}/>
         {props.commentsNumber}

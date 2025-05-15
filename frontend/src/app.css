@@ -8,6 +8,7 @@
   --borderColor: 1px solid #d9d9d9;
   --hoverGray: #ededed;
   --borderGray: #a6a6a6;
+  --nytBlue: #4b739c;
 }
 
 * {
@@ -23,8 +24,17 @@ footer {
   padding: 0 10% 0 10%;
 }
 
+.small-gap {
+    gap: 10px;
+}
+
 .w-full {
   width: 100%;
+}
+
+.comments-content {
+  padding: 40px 0px 0px 0px;
+  gap: 24px;
 }
 
 .button-container {
@@ -76,14 +86,36 @@ footer {
   border: 1px solid var(--borderGray);
 }
 
+.comment {
+    padding: 0px 6px;
+}
+
+.cancel-button {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #121212;
+    border: 1px solid var(--borderGray);
+}
+
+.submit-button {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: var(--nytBlue);
+}
+
 h1.comments-header {
   margin: 0;
   font-size: 28px;
 }
 
 p.comments-number {
-  margin: 2px;
-  font-size: 20px;
+  margin: 1px;
+  font-size: 24px;
 }
 
 .comments-button:hover {
@@ -94,24 +126,33 @@ p.comments-number {
   padding: 8px 10px;
   border-radius: 4px;
   border: 1px solid var(--borderGray);
-  margin: 14px 0px;
+  margin: 24px 0px 12px 0px;
   width: 100%;
 }
 
-.cancel-button {
+.x-button {
   background-color: hsla(0, 0%, 0%, 0);
   color: #121212;
   padding: 0 8px;
+}
+
+.reply-button {
+  color: var(--nytBlue);
+  background-color: hsla(0, 0%, 0%, 0);
+  padding: 0;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .sidebar {
   width: 400px;
   height: 100%;
   background-color: #ffffff;
-  padding: 12px 20px;
+  padding: 16px 28px;
 
   position: fixed;
   z-index: 2;
+  overflow: scroll;
 }
 
 .overlay {

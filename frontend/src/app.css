@@ -22,7 +22,7 @@
 .sidebar-header {
     top: 0;
     background-color: #ffffff;
-    padding: 8px 14px;
+    padding: 8px 14px 0px 14px;
 }
 
 .main {
@@ -155,7 +155,7 @@ p.comments-number {
 }
 
 .sidebar-content {
-    padding: 16px 28px;
+    padding: 0px 28px;
 }
 
 #sidebar {

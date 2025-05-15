@@ -58,14 +58,26 @@
 </script>
 
 <section class="main">
-  <Sidebar title="some sort of sidebar?" visible={isSidebarVisible} />
+  <!-- Sidebar and overlay -->
+  <div class="overlay"></div>
+  <div class="flex-row justify-end">
+    <Sidebar 
+      title="Reallly really important news article!! Why is the title so long? Who knows" 
+      visible={isSidebarVisible}
+      toggleSidebar={toggleSidebar}
+      allComments={[1, 2, 3]}
+      numComments={10} />
+  </div>
+
   <Navbar />
+
+  <!-- Renders one element for each article in articleData -->
   <div class="body">
     {#each allArticles as articleData}
       <Article {...articleData} />
     {/each}
   </div>
   <div class="button-container">
-    <button onclick={() => getNewArticles(url, apiKey)}>Load more articles</button>
+    <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}>Load more articles</button>
   </div>
 </section>

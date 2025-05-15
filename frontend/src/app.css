@@ -4,14 +4,14 @@
 }
 
 /* Just wanted to learn how to make variables so did it here  */
-:root { 
-  --borderColor: 1px solid #D9D9D9;; 
+:root {
+  --borderColor: 1px solid #d9d9d9;
   --hoverGray: #ededed;
   --borderGray: #a6a6a6;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .main {
@@ -24,447 +24,438 @@ footer {
 }
 
 .w-full {
-    width: 100%;
+  width: 100%;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0px;
 }
 
 .flex-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .flex-col {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .justify-end {
-    justify-content: end;
+  justify-content: end;
 }
 
 .justify-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .align-end {
-    align-items: end;
+  align-items: end;
 }
 
 .comments-header {
-    gap: 8px;
+  gap: 8px;
 }
 
 .comments-button {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 6px;
 
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 100px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 100px;
 
-    background-color: #ffffff;
-    color: #121212;
-    border: 1px solid var(--borderGray);
+  background-color: #ffffff;
+  color: #121212;
+  border: 1px solid var(--borderGray);
 }
 
 h1.comments-header {
-    margin: 0px;
-    font-size: 28px;
+  margin: 0;
+  font-size: 28px;
 }
 
 p.comments-number {
-    margin: 2px;
-    font-size: 20px;
-
+  margin: 2px;
+  font-size: 20px;
 }
 
 .comments-button:hover {
-    background-color: var(--hoverGray);
+  background-color: var(--hoverGray);
 }
 
 .comment-input {
-    padding: 8px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--borderGray);
-    margin: 14px 0px;
-    width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--borderGray);
+  margin: 14px 0px;
+  width: 100%;
 }
 
 .cancel-button {
-    background-color: hsla(0, 0%, 0%, 0);
-    color: #121212;
-    padding: 0 8px;
+  background-color: hsla(0, 0%, 0%, 0);
+  color: #121212;
+  padding: 0 8px;
 }
 
 .sidebar {
-    width: 400px;
-    height: 100%;
-    background-color: #ffffff;
-    padding: 12px 20px;
+  width: 400px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 12px 20px;
 
-    position: fixed;
-    z-index: 2;
+  position: fixed;
+  z-index: 2;
 }
 
 .overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: #121212;
-    opacity: 0.3;
-    z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  opacity: 0.3;
+  z-index: 1;
 }
 
 h1.sidebar-header {
-    margin: 10px 0px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  margin: 10px 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 button {
-    background-color: #121212;
-    color: white;
-    padding: 12px 24px;
-    text-align: center;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
+  background-color: #121212;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
 }
 
 /* This is just for overall page padding getting smaller for ipad or moblie view  */
-@media screen and (max-width: 1024px) { 
+@media screen and (max-width: 1024px) {
   .footer {
-      padding: 0 7% 1% 7%;
+    padding: 0 7% 1% 7%;
   }
 }
 
-
 /* Decided to use grid here cause it was easier to showcase the sizing with template */
-header{
+header {
   display: grid;
   grid-template-columns: 15% 85%;
 
-
-  .date{  
-      /* margin-left: 90%; */
-      margin-top: 15%;
-      align-items: center;
-      justify-content: center;
-      p{
-          font-family: 'Helvetica Neue';
-          font-size: 15px;
-          padding: 0;
-          margin: 0;
-
-      }
+  .date {
+    /* margin-left: 90%; */
+    margin-top: 15%;
+    align-items: center;
+    justify-content: center;
+    p {
+      font-family: "Helvetica Neue";
+      font-size: 15px;
+      padding: 0;
+      margin: 0;
+    }
   }
-  h1{
-      font-family: customFont;
-      font-weight:lighter;
-      font-size: 60px;
-      display: flex;
-      margin-left: 15%;
-      margin-top: 0;
-      margin-bottom: 10px;
+  h1 {
+    font-family: customFont;
+    font-weight: lighter;
+    font-size: 60px;
+    display: flex;
+    margin-left: 15%;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
- 
 }
 
 /* This is where all the navbar styling took place, I used flexbox cause you just put in center and inorder */
-.navbar{
+.navbar {
   display: flex;
   justify-content: center;
   /* background-color: aqua; */
   gap: 20px;
   margin-bottom: 1%;
   /* decided to add color change to make it more fun */
-  a{
-      color: black;
-      text-decoration: none;
-      font-family: Funnel Sans;
+  a {
+    color: black;
+    text-decoration: none;
+    font-family: Funnel Sans;
   }
-  a:hover{
-      color: burlywood;
-      /* border-bottom: 2px solid black;    */
-      /* padding-bottom: 2px;   */
+  a:hover {
+    color: burlywood;
+    /* border-bottom: 2px solid black;    */
+    /* padding-bottom: 2px;   */
   }
-  
 }
 
 /* did this part for fun, used flex again  */
-.live{
+.live {
   display: flex;
   justify-content: center;
- 
-  font-family: 'Helvetica Neue';
+
+  font-family: "Helvetica Neue";
   font-size: 14px;
   font-weight: bold;
   /* gap: 25px; */
   align-items: center;
-  a{
-      color: black;
-      text-decoration: none;
-      padding-left: 25px;
+  a {
+    color: black;
+    text-decoration: none;
+    padding-left: 25px;
   }
-  a:hover{
-      color: gray;
-      /* border-bottom: 2px solid black;    */
-      /* padding-bottom: 2px;   */   
+  a:hover {
+    color: gray;
+    /* border-bottom: 2px solid black;    */
+    /* padding-bottom: 2px;   */
   }
-  p{
-      color: maroon;
-      /* margin-top: 0; */
-      gap: 25px;
-
+  p {
+    color: maroon;
+    /* margin-top: 0; */
+    gap: 25px;
   }
-  .time{
-      font-size: 11px;
-      padding-left: 5px;
-      color: gray;
-      font-weight: 200;
-      gap: 25px;
-
+  .time {
+    font-size: 11px;
+    padding-left: 5px;
+    color: gray;
+    font-weight: 200;
+    gap: 25px;
   }
-
 }
 
 /* these are all the different kinda of horizontal lines I used. Last two were used for ipad and moblie view  */
-hr{
+hr {
   margin: 0;
   padding: 0;
   border-top: var(--borderColor);
-
 }
-hr.bold{
+hr.bold {
   border-top: 1px solid #000000;
 }
-hr.special{
+hr.special {
   border: 0px;
 }
-hr.special1{
+hr.special1 {
   border: 0px;
 }
-
 
 /* where the main segment styling, used grid to have 3 columns and then styled the titles, p, and the times */
-.body{
+.body {
   display: grid;
   grid-template-columns: 30.9% 39.9% 30%;
   padding-top: 1%;
- 
-  .title1{
-      font-family: Tinos;
-      font-weight: 520;
-      margin: 4% 0 4% 0;
-      font-size: 27px;
+
+  .title1 {
+    font-family: Tinos;
+    font-weight: 520;
+    margin: 4% 0 4% 0;
+    font-size: 27px;
   }
-  p{
-      font-size: 17px;
-      margin: 4% 0 2% 0%;
+  p {
+    font-size: 17px;
+    margin: 4% 0 2% 0%;
   }
 
-  .time{
-      font-size: 11px;
-      font-family: Funnel Sans;
-      color: gray;
-      font-weight: 200;
-      margin-bottom: 4%;
+  .time {
+    font-size: 11px;
+    font-family: Funnel Sans;
+    color: gray;
+    font-weight: 200;
+    margin-bottom: 4%;
   }
 
-/* styled each of the columns, very similar code for all three could have had them as one */
-  .firstColumn{
-      /* background-color: blue;  */
-      border-right: var(--borderColor);
-      padding: 20px;
-      
-      padding-top: 3%; 
-      img{
-          max-width:  100%;
-          max-height: 100%;
+  /* styled each of the columns, very similar code for all three could have had them as one */
+  .firstColumn {
+    /* background-color: blue;  */
+    border-right: var(--borderColor);
+    padding: 20px;
 
-      }  
+    padding-top: 3%;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
-  .firstColumn:hover{
+  .firstColumn:hover {
     cursor: pointer;
-    .title1{
-        color: rgb(109, 108, 108);
-      }
-
+    .title1 {
+      color: rgb(109, 108, 108);
+    }
   }
-  .secondColumn{
-      /* background-color: blueviolet; */
-      border-right: var(--borderColor);
-      padding: 20px;
-      img{
-          max-width:  100%;
-          max-height: 100%; 
-      }
+  .secondColumn {
+    /* background-color: blueviolet; */
+    border-right: var(--borderColor);
+    padding: 20px;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
-  .secondColumn:hover{
+  .secondColumn:hover {
     cursor: pointer;
-    .title1{
-        color: rgb(109, 108, 108);
-      }
+    .title1 {
+      color: rgb(109, 108, 108);
+    }
   }
-  .thirdColumn{
-      margin-left: 10%;
-      /* margin-right: 10%; */ 
-      /* background-color: aquamarine; */
-      img{
-          max-width:  100%;
-          max-height: 100%;
-          padding-top: 3px;        
-      }
+  .thirdColumn {
+    margin-left: 10%;
+    /* margin-right: 10%; */
+    /* background-color: aquamarine; */
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      padding-top: 3px;
+    }
   }
-  .thirdColumn:hover{
+  .thirdColumn:hover {
     cursor: pointer;
-    .title1{
-        color: rgb(109, 108, 108);
-      }
+    .title1 {
+      color: rgb(109, 108, 108);
+    }
   }
 }
 
 /* this is where the main laptop -> ipad view takes place
 had to change from 3 to 2 columns, this complicated the vertical lines so I rearranged them here.  */
 @media screen and (max-width: 1024px) {
-  .navbar{
-      display: none;
-  }
-  header{
-      /* made them smaller so it would look prettier  */
-      grid-template-columns: 100%;
-      /* changed it so no more date and will just display the title */
-      h1{
-          font-size: 50px;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-          margin: 0;
-      }
-      .date{
-          display: none;
-      }
+  .sidebar {
+    width: 60%;
   }
 
-  hr.special{
-      border-top: var(--borderColor);
+  .navbar {
+    display: none;
+  }
+  header {
+    /* made them smaller so it would look prettier  */
+    grid-template-columns: 100%;
+    /* changed it so no more date and will just display the title */
+    h1 {
+      font-size: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+    .date {
+      display: none;
+    }
+  }
+
+  hr.special {
+    border-top: var(--borderColor);
   }
   /* changed to 2 columns and also rest of this is just for the veritcal lines layout */
   .body {
-      grid-template-columns: 50% 50%;
-      .firstColumn{
-          border-left: 0px;
-          border-right: 0px;
-          padding: 0;
-          .first{
-              order: 1; 
-              border-right: var(--borderColor);
-              padding: 20px;
-          }
-          .second{
-              order: 2; 
-              padding: 20px;
-          }
+    grid-template-columns: 50% 50%;
+    .firstColumn {
+      border-left: 0px;
+      border-right: 0px;
+      padding: 0;
+      .first {
+        order: 1;
+        border-right: var(--borderColor);
+        padding: 20px;
       }
-      .secondColumn{
-          order: -1; 
-          padding: 0;
-          border-left: 0px;
-          border-right: 0px;
-          
-          .first{
-              order: 1; 
-              border-right: var(--borderColor);
-                padding: 20px;
-             
+      .second {
+        order: 2;
+        padding: 20px;
+      }
+    }
+    .secondColumn {
+      order: -1;
+      padding: 0;
+      border-left: 0px;
+      border-right: 0px;
 
-          }
-          .second{
-              order: 2; 
-              border-left: 0px;
-          border-right: 0px;
-          }
+      .first {
+        order: 1;
+        border-right: var(--borderColor);
+        padding: 20px;
       }
-      .thirdColumn{
-          padding: 0;
-          margin: 0;
-          border-left: 0px;
-          border-right: 0px;
-          .first{
-              padding: 20px;
-              order: 1; 
-              border-right: var(--borderColor);
-              img{
-                  max-width: 90%;
-                  max-height: 90%;
-              }
-          }
-          .second{
-              order: 2; 
-              padding: 20px;
-              border-left: 0px;
-          border-right: 0px;
-          }
-          /* order: 3;  */
+      .second {
+        order: 2;
+        border-left: 0px;
+        border-right: 0px;
       }
+    }
+    .thirdColumn {
+      padding: 0;
+      margin: 0;
+      border-left: 0px;
+      border-right: 0px;
+      .first {
+        padding: 20px;
+        order: 1;
+        border-right: var(--borderColor);
+        img {
+          max-width: 90%;
+          max-height: 90%;
+        }
+      }
+      .second {
+        order: 2;
+        padding: 20px;
+        border-left: 0px;
+        border-right: 0px;
+      }
+      /* order: 3;  */
+    }
   }
 }
 
 /* this is for the phone view, decided to change the title size and the rest is again just the vertical lines.  */
 @media screen and (max-width: 768px) {
-  hr.special1{
-      border-top: var(--borderColor);
+  hr.special1 {
+    border-top: var(--borderColor);
   }
-  header{
-      
-      h1{
-          font-size: 40px;
-      }
-     
+  header {
+    h1 {
+      font-size: 40px;
+    }
+  }
+
+  .sidebar {
+    width: 100%;
   }
 
   .body {
-       /* just having one column */
-      grid-template-columns: 100%;
+    /* just having one column */
+    grid-template-columns: 100%;
+    border-left: 0px;
+    border-right: 0px;
+    .firstColumn {
+      .first {
+        border-left: 0px;
+        border-right: 0px;
+      }
       border-left: 0px;
       border-right: 0px;
-      .firstColumn{
-          .first{
-              border-left: 0px;
-              border-right: 0px;
-          }
-          border-left: 0px;
-          border-right: 0px;
+    }
+    .secondColumn {
+      .first {
+        border-left: 0px;
+        border-right: 0px;
       }
-      .secondColumn{
-          .first{
-              border-left: 0px;
-              border-right: 0px;
-          }
-          border-left: 0px;
-          border-right: 0px;
+      border-left: 0px;
+      border-right: 0px;
+    }
+    .thirdColumn {
+      .first {
+        border-left: 0px;
+        border-right: 0px;
       }
-      .thirdColumn{
-          .first{
-              border-left: 0px;
-              border-right: 0px;
-          }
-          border-left: 0px;
-          border-right: 0px;
-      }
+      border-left: 0px;
+      border-right: 0px;
+    }
   }
 }

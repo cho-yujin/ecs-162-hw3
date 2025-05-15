@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Comment from "./comment.svelte";
+
   export type SidebarProps = {
     title: string;
     visible: boolean;
@@ -31,8 +33,9 @@
       name="comment"
       placeholder="Share your thoughts..."
     ></textarea>
-    <!-- {#each comment as props.allComments}
-    <Article {...articleData} />
-    {/each} -->
+    <button>Post comment</button>
+    {#each props.allComments as commentData}
+      <Comment {...commentData} />
+    {/each}
   </div>
 </aside>

@@ -40,6 +40,3 @@ npm install -D jsdom
 ```
 
 The unit tests can then be ran in the `frontend` folder with the command `npm test`.
-
-# Git history
-Our .git folder was too large. We got rid of the `objects` folder in .git to reduce the size. If this causes any issues in viewing the git history, please let us know.

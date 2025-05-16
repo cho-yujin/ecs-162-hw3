@@ -11,3 +11,18 @@ services:
     ports:
       - "${PORT}:8000"
 
+  dex:
+    build:
+      context: .
+      dockerfile: Dockerfile.dex
+    container_name: dex
+    volumes:
+      - ./config/dex:/etc/dex
+    ports:
+      - "5556:5556"
+    env_file:
+      - .env
+      - .env.dev
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["envsubst < /etc/dex/dex.yaml > /etc/dex/dex_final.yaml && dex serve /etc/dex/dex_final.yaml"]
+

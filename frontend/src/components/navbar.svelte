@@ -11,6 +11,7 @@
         <p>Today's Paper</p>
     </div>
     <h1>The New York Times</h1>
+    <a href="/a"><button><strong>LOG IN</strong></button></a>
 </header>
 
 <section class="secondHeader">

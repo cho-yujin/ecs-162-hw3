@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Navbar from "./components/Navbar.svelte";
-  import Article, { type ArticleData } from "./components/Article.svelte";
+  import Navbar from "./components/navbar.svelte";
+  import Article, { type ArticleData } from "./components/article.svelte";
   import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
 
   let allArticles: ArticleData[] = [];

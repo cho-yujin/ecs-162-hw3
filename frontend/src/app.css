@@ -49,7 +49,7 @@ button {
 /* Decided to use grid here cause it was easier to showcase the sizing with template */
 header{
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 15% 70% 15%;
 
 
   .date{  
@@ -73,6 +73,24 @@ header{
       margin-left: 15%;
       margin-top: 0;
       margin-bottom: 10px;
+  }
+
+   button {
+    color: white;
+    background-color: pink;
+    font-family: 'Helvetica';
+    font-size: 11px;
+    /* padding: 8px 12px; */
+    /* margin-top: 15%;
+    margin-bottom: 15%; */
+    margin: 15%;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: rgb(249, 157, 172);
+    transition-timing-function: ease-in-out;
   }
  
 }

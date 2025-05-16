@@ -1,12 +1,23 @@
 from flask import Flask, jsonify, send_from_directory
 import os
 from flask_cors import CORS
+from authlib.integrations.flask_client import OAuth
+
 
 static_path = os.getenv('STATIC_PATH','static')
 template_path = os.getenv('TEMPLATE_PATH','templates')
 
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 CORS(app)
+
+oauth = OAuth(app)
+oauth.register(
+    name='dex',
+    client_id='flask-app',
+    client_secret='some-secret',
+    server_metadata_url='http://localhost:5556/.well-known/openid-configuration',
+)
+
 
 @app.route('/api/key')
 def get_key():

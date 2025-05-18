@@ -23,6 +23,12 @@
   padding: 0;
 }
 
+#error-text {
+  color:rgb(200, 0, 0);
+  margin: 0;
+  padding-bottom: 4px;
+}
+
 .login-button {
   background-color: #121212;
   color: #ffffff;

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
-  import {createComment, deleteComment} from "../logic/commentFunctions"
+  import { createComment, deleteComment } from "../logic/commentFunctions";
+  import { onMount } from "svelte";
 
   export type SidebarProps = {
     title: string;
@@ -15,20 +16,26 @@
   let commentString = $state("");
 
   function onInput(event: any) {
-    commentString = event.currentTarget.value
+    commentString = event.currentTarget.value;
   }
 
   function clearValue() {
-    commentString = ""
+    commentString = "";
+    document.getElementById("error-text")!.style.visibility = "hidden";
   }
 
+  onMount(() => {
+    document.getElementById("error-text")!.style.visibility = "hidden";
+  });
 </script>
 
 <aside id="sidebar">
   <div class="sticky sidebar-header">
     <div class="flex-row justify-between small-gap">
       <h1 class="sidebar-header-text">{props.title}</h1>
-      <button class="x-button" onclick={() => props.toggleSidebar(props.title)}>X</button>
+      <button class="x-button" onclick={() => props.toggleSidebar(props.title)}
+        >X</button
+      >
     </div>
     <hr />
     <br />
@@ -50,13 +57,22 @@
         value={commentString}
       ></textarea>
 
-      {#if props.userInfo && props.userInfo["signed_in"]}
-      <div class="flex-row justify-end small-gap">
-        <button class="cancel-button" onclick={clearValue}>CANCEL</button>
-        <button class="submit-button" onclick={() => createComment(props.articleID, commentString, props.userInfo)}>SUBMIT</button>
+      <div class="flex-row justify-end">
+        <p id="error-text">You cannot submit an empty comment.</p>
       </div>
+
+      {#if props.userInfo && props.userInfo["signed_in"]}
+        <div class="flex-row justify-end small-gap">
+          <button class="cancel-button" onclick={clearValue}>CANCEL</button>
+          <button
+            class="submit-button"
+            onclick={() =>
+              createComment(props.articleID, commentString, props.userInfo)}
+            >SUBMIT</button
+          >
+        </div>
       {:else}
-      <p class="flex-row justify-end m-0">Log in to post comments :3</p>
+        <p class="flex-row justify-end m-0">Log in to post comments :3</p>
       {/if}
 
       <div class="flex-col comments-content">

@@ -3,8 +3,8 @@
 </script>
 
 {#if userInfo && userInfo["signed_in"]}
-    <div class="flex-col align-end">
-        <p class="profile-username">{userInfo.user["name"]}</p>
+    <div class="profile-info">
+        <p class="profile-username">Hi, <strong>{userInfo.user["name"]}</strong>!</p>
         <a href="http://localhost:8000/logout" class="logout-button">Log out</a>
     </div>
 {:else}

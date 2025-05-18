@@ -6,6 +6,7 @@
     toggleSidebar: (title: string) => void;
     allComments: any;
     numComments: Number;
+    userInfo: any;
   };
 
   const props: SidebarProps = $props();
@@ -35,10 +36,14 @@
         placeholder="Share your thoughts..."
       ></textarea>
 
+      {#if props.userInfo && props.userInfo["signed_in"]}
       <div class="flex-row justify-end small-gap">
         <button class="cancel-button">CANCEL</button>
         <button class="submit-button">SUBMIT</button>
       </div>
+      {:else}
+      <p class="flex-row justify-end m-0">Log in to post comments :3</p>
+      {/if}
 
       <div class="flex-col comments-content">
         {#each props.allComments as commentData}

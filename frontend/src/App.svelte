@@ -86,6 +86,7 @@
       "comment",
     ]}
     numComments={10}
+    userInfo={userInfo}
   />
   
   <div class="body-content">

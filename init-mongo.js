@@ -8,3 +8,5 @@ db.users.find().count() === 0 && db.users.insertOne({
     username: 'alice',
     userID: '123'
 });
+
+db.createCollection('articles');

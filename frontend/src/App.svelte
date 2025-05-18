@@ -1,10 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Navbar from "./components/Navbar.svelte";
-  import Article, { type ArticleData } from "./components/Article.svelte";
-  import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
+  import Navbar from "./components/navbar.svelte";
+  import Article, { type ArticleData } from "./components/article.svelte";
+  import Sidebar from "./components/sidebar.svelte";
+  import { getApiKey, fetchArticles, fetchUser } from "./logic/fetchFunctions";
 
-  let allArticles: ArticleData[] = [];
+  let sidebarTitle = $state("Default title");
+  let userInfo = $state(null);
+
+  function toggleSidebar(title: string) {
+    let sidebar = document.getElementById("sidebar")!;
+    let overlay = document.getElementById("overlay")!;
+
+    sidebarTitle = title;
+
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+
+  let allArticles: ArticleData[] = $state([]);
   let apiKey: string = "";
   let url: string = "";
   let pageNum = 0;
@@ -16,6 +30,8 @@
       thumbnail: dataObject.multimedia.default.url,
       caption: dataObject.multimedia.caption,
       url: dataObject.web_url,
+      toggleSidebar: toggleSidebar,
+      commentsNumber: 0,
     };
   }
 
@@ -26,7 +42,8 @@
 
     url =
       "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=UC%20Davis" +
-      apiKeyParam + pageNumParam;
+      apiKeyParam +
+      pageNumParam;
 
     // Fetch articles
     const data = await fetchArticles(url);
@@ -40,6 +57,8 @@
   }
 
   onMount(async () => {
+    userInfo = await fetchUser();
+
     // Get apiKey from Flask backend
     apiKey = await getApiKey();
 
@@ -49,13 +68,39 @@
 </script>
 
 <section class="main">
-  <Navbar />
-  <div class="body">
-    {#each allArticles as articleData}
-      <Article {...articleData} />
-    {/each}
-  </div>
-  <div class="button-container">
-    <button on:click={() => getNewArticles(url, apiKey)}>Load more articles</button>
+  <!-- Sidebar and overlay -->
+  <div id="overlay"></div>
+  <Sidebar
+    title={sidebarTitle}
+    toggleSidebar={() => toggleSidebar(sidebarTitle)}
+    allComments={[
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+      "comment",
+    ]}
+    numComments={10}
+    userInfo={userInfo}
+  />
+  
+  <div class="body-content">
+    <Navbar userInfo={userInfo}/>
+    <!-- Renders one element for each article in articleData -->
+    <div class="body">
+      {#each allArticles as articleData}
+        <Article {...articleData} />
+      {/each}
+    </div>
+    <div class="button-container">
+      <button class="dark-button" onclick={() => getNewArticles(url, apiKey)}
+        >Load more articles</button
+      >
+    </div>
   </div>
 </section>

@@ -4,6 +4,8 @@ from authlib.integrations.flask_client import OAuth
 from authlib.common.security import generate_token
 import os
 
+moderators = ["moderator@hw3.com"]
+
 static_path = os.getenv('STATIC_PATH','static')
 template_path = os.getenv('TEMPLATE_PATH','templates')
 
@@ -47,7 +49,7 @@ def authorize():
 
     user_info = oauth.flask_app.parse_id_token(token, nonce=nonce)  # or use .get('userinfo').json()
     session['user'] = user_info
-    return redirect('http://localhost:5173/')
+    return redirect('http://localhost:5173/?signed_in=1')
 
 @app.route('/logout')
 def logout():
@@ -64,6 +66,10 @@ def serve_frontend(path=''):
     if path != '' and os.path.exists(os.path.join(static_path,path)):
         return send_from_directory(static_path, path)
     return send_from_directory(template_path, 'index.html')
+
+@app.route('/profile')
+def get_user_profile():
+    return session.get('user')
 
 if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_ENV') != 'production'

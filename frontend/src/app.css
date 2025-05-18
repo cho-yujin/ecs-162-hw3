@@ -15,6 +15,20 @@
   box-sizing: border-box;
 }
 
+.login-button {
+  background-color: #121212;
+  color: #ffffff;
+  text-decoration: none;
+
+  justify-self: end;
+  align-self: center;
+  
+  padding: 12px 32px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 8px;
+}
+
 .sticky {
     position: sticky;
 }
@@ -223,7 +237,7 @@ button {
 /* Decided to use grid here cause it was easier to showcase the sizing with template */
 header {
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 15% 70% 15%;
 
   .date {
     /* margin-left: 90%; */
@@ -242,9 +256,9 @@ header {
     font-weight: lighter;
     font-size: 60px;
     display: flex;
-    margin-left: 15%;
     margin-top: 0;
     margin-bottom: 10px;
+    justify-self: center;
   }
 }
 

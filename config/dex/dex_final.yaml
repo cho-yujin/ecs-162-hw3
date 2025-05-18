@@ -16,7 +16,7 @@ staticClients:
   - id: flask-app
     redirectURIs:
       - http://localhost:8000/authorize
-    name: Flask App
+    name: flask_app
     secret: flask-secret
 
 enablePasswordDB: true
@@ -38,6 +38,11 @@ staticPasswords:
     hash: "$2b$12$321HomfT164U9f5l.xQaYuHThGCss8PRPNy8t./tq8Frgr6UYeEka" # password = "upassword"
     username: user
     userID: "789"
+
+  - email: milo@hw3.com
+    hash: "$2b$12$9lNBNxMI9W4ngNk7YIQIa.CL8US9xiHCrEb1Pxmijdh8Qp5R1f25G" # password = "milomilo"
+    username: milo
+    userID: "999"
 
 oauth2:
   skipApprovalScreen: true

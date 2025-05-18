@@ -39,5 +39,10 @@ staticPasswords:
     username: user
     userID: "789"
 
+  - email: milo@hw3.com
+    hash: "$2b$12$9lNBNxMI9W4ngNk7YIQIa.CL8US9xiHCrEb1Pxmijdh8Qp5R1f25G" # password = "milomilo"
+    username: milo
+    userID: "999"
+
 oauth2:
   skipApprovalScreen: true

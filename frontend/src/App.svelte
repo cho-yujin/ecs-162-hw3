@@ -3,9 +3,10 @@
   import Navbar from "./components/navbar.svelte";
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
-  import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
+  import { getApiKey, fetchArticles, fetchUser } from "./logic/fetchFunctions";
 
   let sidebarTitle = $state("Default title");
+  let userInfo = $state(null);
 
   function toggleSidebar(title: string) {
     let sidebar = document.getElementById("sidebar")!;
@@ -56,6 +57,8 @@
   }
 
   onMount(async () => {
+    userInfo = await fetchUser();
+
     // Get apiKey from Flask backend
     apiKey = await getApiKey();
 
@@ -86,7 +89,7 @@
   />
   
   <div class="body-content">
-    <Navbar />
+    <Navbar userInfo={userInfo}/>
     <!-- Renders one element for each article in articleData -->
     <div class="body">
       {#each allArticles as articleData}

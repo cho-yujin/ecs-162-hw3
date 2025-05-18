@@ -69,7 +69,14 @@ def serve_frontend(path=''):
 
 @app.route('/profile')
 def get_user_profile():
-    return session.get('user')
+    user = session.get('user')
+
+    if user:
+        return {
+            "signed_in": True,
+            "user": user
+        }
+    return {"signed_in": False}
 
 if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_ENV') != 'production'

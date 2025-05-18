@@ -4,6 +4,8 @@
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   const date = new Date().toString();
   const currentDate = date.slice(0, 16);
+
+  let { userInfo } = $props();
 </script>
 
 <header>
@@ -13,7 +15,7 @@
     <p>Today's Paper</p>
   </div>
   <h1 class="nyt-heading">The New York Times</h1>
-  <UserProfile isLoggedIn={false} username={"Username"} />
+  <UserProfile userInfo={userInfo} />
 </header>
 
 <section class="secondHeader">

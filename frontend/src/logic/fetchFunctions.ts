@@ -18,3 +18,14 @@ export async function fetchArticles(url: string) {
   }
   return null;
 }
+
+export async function fetchUser() {
+  try {
+    const res = await fetch("http://localhost:8000/profile", {credentials: "include"});
+    const user = await res.json();
+    return user
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+  }
+  return null;
+}

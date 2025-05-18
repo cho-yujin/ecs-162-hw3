@@ -1,10 +1,10 @@
 <script>
-    let { isLoggedIn, username } = $props();
+    let { userInfo } = $props();
 </script>
 
-{#if isLoggedIn}
+{#if userInfo && userInfo["signed_in"]}
     <div class="flex-col align-end">
-        <p class="profile-username">{username}</p>
+        <p class="profile-username">{userInfo.user["name"]}</p>
         <a href="http://localhost:8000/logout" class="logout-button">Log out</a>
     </div>
 {:else}

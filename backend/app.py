@@ -10,7 +10,7 @@ template_path = os.getenv('TEMPLATE_PATH','templates')
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 app.secret_key = os.urandom(24)
 
-CORS(app)
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers="Content-Type,Authorization")
 
 oauth = OAuth(app)
 nonce = generate_token()
@@ -52,7 +52,7 @@ def authorize():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/')
+    return redirect('http://localhost:5173/')
 
 @app.route('/api/key')
 def get_key():

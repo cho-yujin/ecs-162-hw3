@@ -29,6 +29,17 @@
   border-radius: 8px;
 }
 
+.logout-button {
+  padding: 6px 16px;
+  color: #121212;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.logout-button:hover {
+  background-color:rgb(236, 236, 236);
+}
+
 .sticky {
     position: sticky;
 }
@@ -49,7 +60,15 @@ footer {
 }
 
 .body-content {
-    padding: 32px 48px;
+  padding: 32px 48px;
+}
+
+p.profile-username {
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px; 
+
+  padding: 30px 16px 0 16px;
 }
 
 .small-gap {

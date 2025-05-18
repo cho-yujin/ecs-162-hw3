@@ -4,7 +4,6 @@
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
   import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
-  import { getByTitle } from "@testing-library/svelte";
 
   let sidebarTitle = $state("Default title");
 

@@ -1,4 +1,6 @@
 <script>
+  import UserProfile from "./userProfile.svelte";
+
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   const date = new Date().toString();
   const currentDate = date.slice(0, 16);
@@ -11,7 +13,7 @@
     <p>Today's Paper</p>
   </div>
   <h1 class="nyt-heading">The New York Times</h1>
-  <a href="http://localhost:8000/login" class="login-button"> Log in </a>
+  <UserProfile isLoggedIn={false} username={"Username"} />
 </header>
 
 <section class="secondHeader">

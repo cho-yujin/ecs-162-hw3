@@ -454,6 +454,8 @@ had to change from 3 to 2 columns, this complicated the vertical lines so I rear
   }
 
   .profile-info {
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     padding: 8px 0;
   }

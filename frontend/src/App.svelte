@@ -3,15 +3,17 @@
   import Navbar from "./components/navbar.svelte";
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
-  import { getApiKey, fetchArticles, fetchUser } from "./logic/fetchFunctions";
+  import { getApiKey, fetchArticles, fetchUser } from "./logic/getFunctions";
 
   let sidebarTitle = $state("Default title");
+  let articleID = $state("");
   let userInfo = $state(null);
 
-  function toggleSidebar(title: string) {
+  function toggleSidebar(title: string, id: string) {
     let sidebar = document.getElementById("sidebar")!;
     let overlay = document.getElementById("overlay")!;
 
+    articleID = id;
     sidebarTitle = title;
 
     sidebar.classList.toggle("active");
@@ -25,6 +27,7 @@
 
   function constructArticleObject(dataObject: any): ArticleData {
     return {
+      id: dataObject._id,
       title: dataObject.headline.main,
       abstract: dataObject.abstract,
       thumbnail: dataObject.multimedia.default.url,
@@ -72,7 +75,7 @@
   <div id="overlay"></div>
   <Sidebar
     title={sidebarTitle}
-    toggleSidebar={() => toggleSidebar(sidebarTitle)}
+    toggleSidebar={() => toggleSidebar(sidebarTitle, articleID)}
     allComments={[
       "comment",
       "comment",
@@ -87,6 +90,7 @@
     ]}
     numComments={10}
     userInfo={userInfo}
+    articleID={articleID}
   />
   
   <div class="body-content">

@@ -2,12 +2,13 @@
   import commentsIcon from '/comments-icon.svg'
 
   export type ArticleData = {
+    id: string;
     title: string;
     abstract: string;
     thumbnail: string; // url to thumbnail image
     caption: string;
     url: string;
-    toggleSidebar: (title: string) => void; // fn to toggle sidebar
+    toggleSidebar: (title: string, id: string) => void; // fn to toggle sidebar
     commentsNumber: number;
   };
 
@@ -24,7 +25,7 @@
     <p data-testid="time" class="time">1000 MIN READ</p>
 
     <div class="flex-row justify-end">
-      <button class="comments-button" onclick={() => props.toggleSidebar(props.title)}>
+      <button class="comments-button" onclick={() => props.toggleSidebar(props.title, props.id)}>
         <img src={commentsIcon} alt={props.caption}/>
         {props.commentsNumber}
       </button>

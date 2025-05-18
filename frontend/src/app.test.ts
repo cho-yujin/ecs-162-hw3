@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/svelte";
 import App from "./App.svelte";
 import Article from "./components/Article.svelte";
 import Navbar from "./components/Navbar.svelte";
-import { getApiKey, fetchArticles } from "./logic/fetchFunctions";
+import { getApiKey, fetchArticles } from "./logic/getFunctions";
 
 let data: any = null;
 beforeAll(async () => {

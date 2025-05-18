@@ -1,5 +1,6 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
+  import {createComment, deleteComment} from "../logic/commentFunctions"
 
   export type SidebarProps = {
     title: string;
@@ -7,9 +8,20 @@
     allComments: any;
     numComments: Number;
     userInfo: any;
+    articleID: string;
   };
 
   const props: SidebarProps = $props();
+  let commentString = $state("");
+
+  function onInput(event: any) {
+    commentString = event.currentTarget.value
+  }
+
+  function clearValue() {
+    commentString = ""
+  }
+
 </script>
 
 <aside id="sidebar">
@@ -34,12 +46,14 @@
         id="comment"
         name="comment"
         placeholder="Share your thoughts..."
+        oninput={(e) => onInput(e)}
+        value={commentString}
       ></textarea>
 
       {#if props.userInfo && props.userInfo["signed_in"]}
       <div class="flex-row justify-end small-gap">
-        <button class="cancel-button">CANCEL</button>
-        <button class="submit-button">SUBMIT</button>
+        <button class="cancel-button" onclick={clearValue}>CANCEL</button>
+        <button class="submit-button" onclick={() => createComment(props.articleID, commentString, props.userInfo)}>SUBMIT</button>
       </div>
       {:else}
       <p class="flex-row justify-end m-0">Log in to post comments :3</p>

@@ -13,9 +13,9 @@ template_path = os.getenv('TEMPLATE_PATH','templates')
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 app.secret_key = os.urandom(24)
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://root:rootpassword@mongo:27017/?authSource=admin")
 # Creates database if it doesn't exist already
-db = client["hw3-app"]
+db = client["mydatabase"]
 # Creates collection if it doesn't exist already
 comments_collection = db["comments"]
 
@@ -85,13 +85,12 @@ def get_user_profile():
         }
     return {"signed_in": False}
 
-@app.route('/comments', methods=['POST'])
-def post_comment():
-    result = comments_collection.insert_one(request.json)
-    return jsonify({"result": str(result)}), 201
-
-@app.route('/comments', methods=['GET'])
-def get_comments():
+@app.route('/comments', methods=['GET', 'POST'])
+def handle_comments():
+    if request.method == 'POST':
+        result = comments_collection.insert_one(request.json)
+        return jsonify({"result": str(result)}), 201
+        
     comments = list(comments_collection.find())
     for comment in comments:
         comment['_id'] = str(comment['_id'])

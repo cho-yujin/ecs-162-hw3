@@ -4,10 +4,30 @@
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
   import { getApiKey, fetchArticles, fetchUser } from "./logic/getFunctions";
+  import { getAllComments } from "./logic/commentFunctions";
+
+  const testComments = [
+    {
+      "article_id": "id",
+      "username": "milo",
+      "comment": "This sucks"
+    },
+    {
+      "article_id": "id",
+      "username": "large milo",
+      "comment": "This really sucks"
+    },
+    {
+      "article_id": "id",
+      "username": "largest milo",
+      "comment": "This is okay actually"
+    }
+  ];
 
   let sidebarTitle = $state("Default title");
   let articleID = $state("");
   let userInfo = $state(null);
+  let allComments = $state(testComments);
 
   function toggleSidebar(title: string, id: string) {
     let sidebar = document.getElementById("sidebar")!;
@@ -61,12 +81,12 @@
 
   onMount(async () => {
     userInfo = await fetchUser();
-
     // Get apiKey from Flask backend
     apiKey = await getApiKey();
-
     // Fetch articles and put into allArticles array
     getNewArticles(url, apiKey);
+    // Fetches comments and stores into allComments array
+    allComments = await getAllComments();
   });
 </script>
 
@@ -76,25 +96,13 @@
   <Sidebar
     title={sidebarTitle}
     toggleSidebar={() => toggleSidebar(sidebarTitle, articleID)}
-    allComments={[
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-    ]}
-    numComments={10}
-    userInfo={userInfo}
-    articleID={articleID}
+    {allComments}
+    {userInfo}
+    {articleID}
   />
-  
+
   <div class="body-content">
-    <Navbar userInfo={userInfo}/>
+    <Navbar {userInfo} />
     <!-- Renders one element for each article in articleData -->
     <div class="body">
       {#each allArticles as articleData}

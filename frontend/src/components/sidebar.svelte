@@ -1,19 +1,19 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
-  import { createComment, deleteComment } from "../logic/commentFunctions";
+  import { createComment, filterComments } from "../logic/commentFunctions";
   import { onMount } from "svelte";
 
   export type SidebarProps = {
     title: string;
     toggleSidebar: (title: string) => void;
     allComments: any;
-    numComments: Number;
     userInfo: any;
     articleID: string;
   };
 
   const props: SidebarProps = $props();
   let commentString = $state("");
+  let articleComments= $state([]);
 
   function onInput(event: any) {
     commentString = event.currentTarget.value;
@@ -26,7 +26,10 @@
 
   onMount(() => {
     document.getElementById("error-text")!.style.visibility = "hidden";
+    articleComments = filterComments(props.allComments, props.articleID);
   });
+11
+
 </script>
 
 <aside id="sidebar">
@@ -45,7 +48,7 @@
     <div class="w-full">
       <div class="flex-row comments-header align-end">
         <h1 class="comments-header">Comments</h1>
-        <p class="comments-number">{props.numComments}</p>
+        <p class="comments-number">{Object.keys(articleComments).length}</p>
       </div>
 
       <textarea
@@ -66,7 +69,7 @@
           <button class="cancel-button" onclick={clearValue}>CANCEL</button>
           <button
             class="submit-button"
-            onclick={() =>
+            onclick={async () =>
               createComment(props.articleID, commentString, props.userInfo)}
             >SUBMIT</button
           >

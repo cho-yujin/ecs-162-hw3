@@ -17,10 +17,9 @@ client = MongoClient("mongodb://localhost:27017/")
 # Creates database if it doesn't exist already
 db = client["hw3-app"]
 # Creates collection if it doesn't exist already
-articles_collection = db["articles"]
 comments_collection = db["comments"]
 
-CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers=["Content-Type,Authorization"])
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers=["Content-Type", "Authorization"])
 
 oauth = OAuth(app)
 nonce = generate_token()
@@ -57,7 +56,7 @@ def authorize():
 
     user_info = oauth.flask_app.parse_id_token(token, nonce=nonce)  # or use .get('userinfo').json()
     session['user'] = user_info
-    return redirect('http://localhost:5173/?signed_in=1')
+    return redirect('http://localhost:5173/')
 
 @app.route('/logout')
 def logout():
@@ -86,14 +85,9 @@ def get_user_profile():
         }
     return {"signed_in": False}
 
-@app.route('/articles', methods=['POST'])
-def post_article():
-    result = articles_collection.update_one(request.json)
-    return jsonify({"result": str(result)}), 201
-
 @app.route('/comments', methods=['POST'])
 def post_comment():
-    result = comments_collection.update_one(request.json)
+    result = comments_collection.insert_one(request.json)
     return jsonify({"result": str(result)}), 201
 
 @app.route('/comments', methods=['GET'])

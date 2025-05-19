@@ -1,4 +1,4 @@
-# ECS 162 Project 2: Ananya and Yujin
+# ECS 162 Project 3: Yujin and Mileyna
 
 ## What we used
 We used Svelte to build our project. The main page of our project is `App.svelte`. This page imports components and functions from other files. All parts of our project are separated into components for clearer structuring.

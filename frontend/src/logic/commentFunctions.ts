@@ -1,33 +1,45 @@
+import type { commentType } from "../components/comment.svelte";
+
+// Functions to do with comment GET requests
+export async function getAllComments() {
+  try {
+    const res = await fetch("http://localhost:8000/comments");
+    const allComments = await res.json();
+    return allComments;
+  } catch (error) {
+    console.error("Failed to fetch comments:", error);
+  }
+  return null;
+}
+
+export function filterComments(allComments: any, articleID: string) {
+  return allComments.filter((comment: commentType) => comment.article_id === articleID);
+}
+
+// Functions to do with comment POST requests
 export async function createComment(
   articleID: string,
   comment: string,
-  userInfo: any
+  userInfo: any,
 ) {
   handleEmptyComments(comment);
 
-  // If article is not already in the database, put article in database
-//   console.log("Article ID:", articleID);
-//   await postArticle(articleID);
-
   // Put comment in database
-  console.log("Username:", userInfo.user["name"]);
-  console.log("User email:", userInfo.user["email"]);
-  console.log("Comment:", comment);
   await postComment(articleID, userInfo, comment);
 }
 
 async function postComment(articleID: string, userInfo: any, comment: string) {
   const data = {
-    "article_id": articleID,
-    "username": userInfo.user["name"],
-    "comment": comment,
+    article_id: articleID,
+    username: userInfo.user["name"],
+    comment: comment,
   };
 
   try {
     await fetch("http://localhost:8000/comments", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8",
       },
       body: JSON.stringify(data),
     });
@@ -36,27 +48,6 @@ async function postComment(articleID: string, userInfo: any, comment: string) {
   }
   return null;
 }
-
-async function postArticle(articleID: string) {
-  const data = {
-    id: articleID,
-  };
-
-  try {
-    await fetch("http://localhost:8000/articles", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  } catch (error) {
-    console.error("Failed to push article to database", error);
-  }
-  return null;
-}
-
-export function deleteComment() {}
 
 function handleEmptyComments(comment: string) {
   if (comment == "") {

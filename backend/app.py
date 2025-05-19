@@ -13,14 +13,13 @@ template_path = os.getenv('TEMPLATE_PATH','templates')
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 app.secret_key = os.urandom(24)
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://root:rootpassword@mongo:27017/?authSource=admin")
 # Creates database if it doesn't exist already
-db = client["hw3-app"]
+db = client["mydatabase"]
 # Creates collection if it doesn't exist already
-articles_collection = db["articles"]
 comments_collection = db["comments"]
 
-CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers=["Content-Type,Authorization"])
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers=["Content-Type", "Authorization"])
 
 oauth = OAuth(app)
 nonce = generate_token()
@@ -57,7 +56,7 @@ def authorize():
 
     user_info = oauth.flask_app.parse_id_token(token, nonce=nonce)  # or use .get('userinfo').json()
     session['user'] = user_info
-    return redirect('http://localhost:5173/?signed_in=1')
+    return redirect('http://localhost:5173/')
 
 @app.route('/logout')
 def logout():
@@ -86,18 +85,12 @@ def get_user_profile():
         }
     return {"signed_in": False}
 
-@app.route('/articles', methods=['POST'])
-def post_article():
-    result = articles_collection.update_one(request.json)
-    return jsonify({"result": str(result)}), 201
-
-@app.route('/comments', methods=['POST'])
-def post_comment():
-    result = comments_collection.update_one(request.json)
-    return jsonify({"result": str(result)}), 201
-
-@app.route('/comments', methods=['GET'])
-def get_comments():
+@app.route('/comments', methods=['GET', 'POST'])
+def handle_comments():
+    if request.method == 'POST':
+        result = comments_collection.insert_one(request.json)
+        return jsonify({"result": str(result)}), 201
+        
     comments = list(comments_collection.find())
     for comment in comments:
         comment['_id'] = str(comment['_id'])

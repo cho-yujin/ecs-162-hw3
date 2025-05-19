@@ -1,19 +1,20 @@
 <script lang="ts">
-  export type commentProps = {
+  export type commentType = {
+    _id: string;
+    article_id: string;
     username: string;
-    userIcon: string;
-    content: string;
+    comment: string;
   };
 
-  const props: commentProps = $props();
+  const props: commentType = $props();
 </script>
 
 <div class="flex-col comment">
-    <div class="flex-row">
-        <img class="user-icon" src={props.userIcon} alt="Profile icon" />
+    <div class="flex-row small-gap align-center">
+        <img class="user-icon" src={"/user-icon.svg"} alt="User icon" />
         <p class="comments-username">{props.username}</p>
     </div>
-    <p class="comments-text">{props.content}</p>
+    <p class="comments-text">{props.comment}</p>
     
     <div class="flex-row">
         <button class="reply-button">Reply</button>

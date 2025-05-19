@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { filterComments } from '../logic/commentFunctions';
+  import type { commentType } from './comment.svelte';
   import commentsIcon from '/comments-icon.svg'
+
 
   export type ArticleData = {
     id: string;
@@ -9,10 +12,11 @@
     caption: string;
     url: string;
     toggleSidebar: (title: string, id: string) => void; // fn to toggle sidebar
-    commentsNumber: number;
+    allComments: commentType[];
   };
 
   const props: ArticleData = $props();
+  let articleComments = $derived(filterComments(props.allComments, props.id))
 </script>
 
 <div class="firstColumn">
@@ -27,7 +31,7 @@
     <div class="flex-row justify-end">
       <button class="comments-button" onclick={() => props.toggleSidebar(props.title, props.id)}>
         <img src={commentsIcon} alt={props.caption}/>
-        {props.commentsNumber}
+        {articleComments.length}
       </button>
     </div>
   </div>

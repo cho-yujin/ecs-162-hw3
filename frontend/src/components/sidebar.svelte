@@ -1,19 +1,26 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
-  import { createComment, deleteComment } from "../logic/commentFunctions";
-  import { onMount } from "svelte";
+  import {
+    createComment,
+    filterComments,
+    getAllComments,
+  } from "../logic/commentFunctions";
+  import { onMount, untrack } from "svelte";
 
   export type SidebarProps = {
     title: string;
-    toggleSidebar: (title: string) => void;
+    toggleSidebar: (title: string, articleID: string) => void;
     allComments: any;
-    numComments: Number;
     userInfo: any;
     articleID: string;
+    refreshComments(): () => void;
   };
 
   const props: SidebarProps = $props();
   let commentString = $state("");
+  let articleComments = $derived(
+    filterComments(props.allComments, props.articleID)
+  );
 
   function onInput(event: any) {
     commentString = event.currentTarget.value;
@@ -33,8 +40,9 @@
   <div class="sticky sidebar-header">
     <div class="flex-row justify-between small-gap">
       <h1 class="sidebar-header-text">{props.title}</h1>
-      <button class="x-button" onclick={() => props.toggleSidebar(props.title)}
-        >X</button
+      <button
+        class="x-button"
+        onclick={() => props.toggleSidebar(props.title, "")}>X</button
       >
     </div>
     <hr />
@@ -45,7 +53,7 @@
     <div class="w-full">
       <div class="flex-row comments-header align-end">
         <h1 class="comments-header">Comments</h1>
-        <p class="comments-number">{props.numComments}</p>
+        <p class="comments-number">{articleComments.length}</p>
       </div>
 
       <textarea
@@ -66,9 +74,11 @@
           <button class="cancel-button" onclick={clearValue}>CANCEL</button>
           <button
             class="submit-button"
-            onclick={() =>
-              createComment(props.articleID, commentString, props.userInfo)}
-            >SUBMIT</button
+            onclick={async () => {
+              createComment(props.articleID, commentString, props.userInfo);
+              clearValue();
+              await props.refreshComments()
+            }}>SUBMIT</button
           >
         </div>
       {:else}
@@ -76,7 +86,7 @@
       {/if}
 
       <div class="flex-col comments-content">
-        {#each props.allComments as commentData}
+        {#each articleComments as commentData}
           <Comment {...commentData} />
           <hr />
         {/each}

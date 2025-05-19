@@ -4,10 +4,16 @@
   import Article, { type ArticleData } from "./components/article.svelte";
   import Sidebar from "./components/sidebar.svelte";
   import { getApiKey, fetchArticles, fetchUser } from "./logic/getFunctions";
+  import { getAllComments } from "./logic/commentFunctions";
 
   let sidebarTitle = $state("Default title");
   let articleID = $state("");
   let userInfo = $state(null);
+  let allComments = $state([]);
+
+  async function refreshComments() {
+    allComments = await getAllComments();
+  }
 
   function toggleSidebar(title: string, id: string) {
     let sidebar = document.getElementById("sidebar")!;
@@ -20,12 +26,12 @@
     overlay.classList.toggle("active");
   }
 
-  let allArticles: ArticleData[] = $state([]);
+  let allArticles: Omit<ArticleData, "allComments">[] = $state([]);
   let apiKey: string = "";
   let url: string = "";
   let pageNum = 0;
 
-  function constructArticleObject(dataObject: any): ArticleData {
+  function constructArticleObject(dataObject: any): Omit<ArticleData, "allComments"> {
     return {
       id: dataObject._id,
       title: dataObject.headline.main,
@@ -34,7 +40,6 @@
       caption: dataObject.multimedia.caption,
       url: dataObject.web_url,
       toggleSidebar: toggleSidebar,
-      commentsNumber: 0,
     };
   }
 
@@ -61,12 +66,12 @@
 
   onMount(async () => {
     userInfo = await fetchUser();
-
     // Get apiKey from Flask backend
     apiKey = await getApiKey();
-
     // Fetch articles and put into allArticles array
     getNewArticles(url, apiKey);
+    // Fetches comments and stores into allComments array
+    allComments = await getAllComments();
   });
 </script>
 
@@ -76,29 +81,18 @@
   <Sidebar
     title={sidebarTitle}
     toggleSidebar={() => toggleSidebar(sidebarTitle, articleID)}
-    allComments={[
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-      "comment",
-    ]}
-    numComments={10}
-    userInfo={userInfo}
-    articleID={articleID}
+    {allComments}
+    {userInfo}
+    {articleID}
+    {refreshComments}
   />
-  
+
   <div class="body-content">
-    <Navbar userInfo={userInfo}/>
+    <Navbar {userInfo} />
     <!-- Renders one element for each article in articleData -->
     <div class="body">
       {#each allArticles as articleData}
-        <Article {...articleData} />
+        <Article allComments={allComments} {...articleData} />
       {/each}
     </div>
     <div class="button-container">

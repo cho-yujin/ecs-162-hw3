@@ -20,14 +20,11 @@ export function filterComments(allComments: any, articleID: string) {
 export async function createComment(
   articleID: string,
   comment: string,
-  userInfo: any
+  userInfo: any,
 ) {
   handleEmptyComments(comment);
 
   // Put comment in database
-  console.log("Username:", userInfo.user["name"]);
-  console.log("User email:", userInfo.user["email"]);
-  console.log("Comment:", comment);
   await postComment(articleID, userInfo, comment);
 }
 

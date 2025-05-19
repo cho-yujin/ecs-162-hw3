@@ -11,13 +11,16 @@
   let userInfo = $state(null);
   let allComments = $state([]);
 
+  async function refreshComments() {
+    allComments = await getAllComments();
+  }
+
   function toggleSidebar(title: string, id: string) {
     let sidebar = document.getElementById("sidebar")!;
     let overlay = document.getElementById("overlay")!;
 
     articleID = id;
     sidebarTitle = title;
-    console.log("article ID in toggle sidebar", articleID)
 
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
@@ -81,6 +84,7 @@
     {allComments}
     {userInfo}
     {articleID}
+    {refreshComments}
   />
 
   <div class="body-content">

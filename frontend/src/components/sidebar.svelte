@@ -1,6 +1,10 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
-  import { createComment, filterComments } from "../logic/commentFunctions";
+  import {
+    createComment,
+    filterComments,
+    getAllComments,
+  } from "../logic/commentFunctions";
   import { onMount, untrack } from "svelte";
 
   export type SidebarProps = {
@@ -9,11 +13,14 @@
     allComments: any;
     userInfo: any;
     articleID: string;
+    refreshComments(): () => void;
   };
 
   const props: SidebarProps = $props();
   let commentString = $state("");
-  let articleComments = $derived(filterComments(props.allComments, props.articleID));
+  let articleComments = $derived(
+    filterComments(props.allComments, props.articleID)
+  );
 
   function onInput(event: any) {
     commentString = event.currentTarget.value;
@@ -67,9 +74,11 @@
           <button class="cancel-button" onclick={clearValue}>CANCEL</button>
           <button
             class="submit-button"
-            onclick={async () =>
-              createComment(props.articleID, commentString, props.userInfo)}
-            >SUBMIT</button
+            onclick={async () => {
+              createComment(props.articleID, commentString, props.userInfo);
+              clearValue();
+              await props.refreshComments()
+            }}>SUBMIT</button
           >
         </div>
       {:else}

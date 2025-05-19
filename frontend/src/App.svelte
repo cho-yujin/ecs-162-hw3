@@ -6,28 +6,10 @@
   import { getApiKey, fetchArticles, fetchUser } from "./logic/getFunctions";
   import { getAllComments } from "./logic/commentFunctions";
 
-  const testComments = [
-    {
-      "article_id": "id",
-      "username": "milo",
-      "comment": "This sucks"
-    },
-    {
-      "article_id": "id",
-      "username": "large milo",
-      "comment": "This really sucks"
-    },
-    {
-      "article_id": "id",
-      "username": "largest milo",
-      "comment": "This is okay actually"
-    }
-  ];
-
   let sidebarTitle = $state("Default title");
   let articleID = $state("");
   let userInfo = $state(null);
-  let allComments = $state(testComments);
+  let allComments = $state([]);
 
   function toggleSidebar(title: string, id: string) {
     let sidebar = document.getElementById("sidebar")!;
@@ -35,17 +17,18 @@
 
     articleID = id;
     sidebarTitle = title;
+    console.log("article ID in toggle sidebar", articleID)
 
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
   }
 
-  let allArticles: ArticleData[] = $state([]);
+  let allArticles: Omit<ArticleData, "allComments">[] = $state([]);
   let apiKey: string = "";
   let url: string = "";
   let pageNum = 0;
 
-  function constructArticleObject(dataObject: any): ArticleData {
+  function constructArticleObject(dataObject: any): Omit<ArticleData, "allComments"> {
     return {
       id: dataObject._id,
       title: dataObject.headline.main,
@@ -54,7 +37,6 @@
       caption: dataObject.multimedia.caption,
       url: dataObject.web_url,
       toggleSidebar: toggleSidebar,
-      commentsNumber: 0,
     };
   }
 
@@ -106,7 +88,7 @@
     <!-- Renders one element for each article in articleData -->
     <div class="body">
       {#each allArticles as articleData}
-        <Article {...articleData} />
+        <Article allComments={allComments} {...articleData} />
       {/each}
     </div>
     <div class="button-container">

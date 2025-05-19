@@ -1,11 +1,11 @@
 <script lang="ts">
   import Comment from "./comment.svelte";
   import { createComment, filterComments } from "../logic/commentFunctions";
-  import { onMount } from "svelte";
+  import { onMount, untrack } from "svelte";
 
   export type SidebarProps = {
     title: string;
-    toggleSidebar: (title: string) => void;
+    toggleSidebar: (title: string, articleID: string) => void;
     allComments: any;
     userInfo: any;
     articleID: string;
@@ -13,7 +13,7 @@
 
   const props: SidebarProps = $props();
   let commentString = $state("");
-  let articleComments= $state([]);
+  let articleComments = $derived(filterComments(props.allComments, props.articleID));
 
   function onInput(event: any) {
     commentString = event.currentTarget.value;
@@ -26,18 +26,16 @@
 
   onMount(() => {
     document.getElementById("error-text")!.style.visibility = "hidden";
-    articleComments = filterComments(props.allComments, props.articleID);
   });
-11
-
 </script>
 
 <aside id="sidebar">
   <div class="sticky sidebar-header">
     <div class="flex-row justify-between small-gap">
       <h1 class="sidebar-header-text">{props.title}</h1>
-      <button class="x-button" onclick={() => props.toggleSidebar(props.title)}
-        >X</button
+      <button
+        class="x-button"
+        onclick={() => props.toggleSidebar(props.title, "")}>X</button
       >
     </div>
     <hr />
@@ -48,7 +46,7 @@
     <div class="w-full">
       <div class="flex-row comments-header align-end">
         <h1 class="comments-header">Comments</h1>
-        <p class="comments-number">{Object.keys(articleComments).length}</p>
+        <p class="comments-number">{articleComments.length}</p>
       </div>
 
       <textarea
@@ -79,7 +77,7 @@
       {/if}
 
       <div class="flex-col comments-content">
-        {#each props.allComments as commentData}
+        {#each articleComments as commentData}
           <Comment {...commentData} />
           <hr />
         {/each}

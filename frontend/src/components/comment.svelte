@@ -1,6 +1,6 @@
 <script lang="ts">
   export type commentType = {
-    id: string;
+    _id: string;
     article_id: string;
     username: string;
     comment: string;

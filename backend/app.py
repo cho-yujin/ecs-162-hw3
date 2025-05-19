@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, send_from_directory, redirect, url_for, session
+from flask import Flask, jsonify, send_from_directory, redirect, session, request
 from flask_cors import CORS
 from authlib.integrations.flask_client import OAuth
 from authlib.common.security import generate_token
+from pymongo import MongoClient
 import os
 
 moderators = ["moderator@hw3.com"]
@@ -12,7 +13,14 @@ template_path = os.getenv('TEMPLATE_PATH','templates')
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 app.secret_key = os.urandom(24)
 
-CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers="Content-Type,Authorization")
+client = MongoClient("mongodb://localhost:27017/")
+# Creates database if it doesn't exist already
+db = client["hw3-app"]
+# Creates collection if it doesn't exist already
+articles_collection = db["articles"]
+comments_collection = db["comments"]
+
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"], allow_headers=["Content-Type,Authorization"])
 
 oauth = OAuth(app)
 nonce = generate_token()
@@ -77,6 +85,23 @@ def get_user_profile():
             "user": user
         }
     return {"signed_in": False}
+
+@app.route('/articles', methods=['POST'])
+def post_article():
+    result = articles_collection.update_one(request.json)
+    return jsonify({"result": str(result)}), 201
+
+@app.route('/comments', methods=['POST'])
+def post_comment():
+    result = comments_collection.update_one(request.json)
+    return jsonify({"result": str(result)}), 201
+
+@app.route('/comments', methods=['GET'])
+def get_comments():
+    comments = list(comments_collection.find())
+    for comment in comments:
+        comment['_id'] = str(comment['_id'])
+    return jsonify(comments)
 
 if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_ENV') != 'production'

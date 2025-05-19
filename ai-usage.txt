@@ -1,12 +1,13 @@
-We did not use any AI assistance for the code for our project. 
-We did use online documentation for Typescript syntax and unit testing, as listed below.
+Link to GitHub repo: https://github.com/cho-yujin/ecs-162-hw3
+Currently the repo is private to avoid cloning, but we can add you to the repo or make it public if necessary.
+Please let us know if there are any issues!
 
-These were used to learn unit testing using Vitest, in addition to discussion slides:
-https://testing-library.com/docs/queries/about 
-https://svelte.dev/docs/svelte/testing 
-https://vitest.dev/api/assert.html 
-https://www.typescriptlang.org/docs/ 
+We used ChatGPT assistance for one part of this assignment.
+Our comments were not pushing to MongoDB and we couldn't figure out why.
 
-We did use ChatGPT assistance for issues we had in downloading packages, such as:
-Searching up random git commands that I forgot about.
-For debugging: when trying to download Vitest, my silicone Mac won’t download a module correctly so I had to show chatgpt the error message and it helped me undownload and then redownload vitest and everything work.
+ChatGPT was not very helpful. It kept telling us to do things we had already tried (such as specifying a POST route in app.py).
+However, it did suggest to test whether the issue was with Mongo or Flask.
+Due to this, we wrote some tests (blank GET requests) to see if we could get localhost:8000/comments to display anything.
+Because it did not display anything, we determined that the issue was that we were unable to connect to Mongo, because the URI to connect to MongoClient was incorrect.
+
+Other than this one portion we struggled on, we mostly used the Svelte docs and the MongoDB slides to write our code.

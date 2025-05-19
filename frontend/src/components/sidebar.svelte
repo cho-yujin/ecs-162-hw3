@@ -77,7 +77,7 @@
             onclick={async () => {
               createComment(props.articleID, commentString, props.userInfo);
               clearValue();
-              await props.refreshComments()
+              await props.refreshComments();
             }}>SUBMIT</button
           >
         </div>

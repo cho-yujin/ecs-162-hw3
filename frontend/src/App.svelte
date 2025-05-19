@@ -12,7 +12,10 @@
   let allComments = $state([]);
 
   async function refreshComments() {
-    allComments = await getAllComments();
+    // const newComments = await getAllComments();
+    // allComments.splice(0, allComments.length, ...newComments);
+    // allComments = allComments;
+    window.location.reload();
   }
 
   function toggleSidebar(title: string, id: string) {
